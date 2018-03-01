@@ -1,0 +1,48 @@
+
+  385  mkdir MeuCompilador
+  386  cd MeuCompilador/
+  387  python3 --version
+  388  python3 -m venv env
+  389  sudo apt install python3-venv
+  390  python3 -m venv env
+  391  ls
+  392  source env/bin/activate
+  393  pip install antlr4-python3-runtime
+  394  touch main.py
+  395  antlr4 -Dlanguage=Python3 arithmetic.g4
+  396  source ~/.bashrc
+  397  source env/bin/activate
+  398  antlr4 -Dlanguage=Python3 arithmetic.g4
+  399  cd Downloads/
+  400  ls
+  401  sudo mv antlr-4.7-complete.jar /usr/local/lib
+  402  sudo su
+  403  source env/bin/activate
+  404  antlr4 -Dlanguage=Python3 arithmetic.g4
+  405  antlr4
+  406  source env/bin/activate
+  407  antlr4 -Dlanguage=Python3 arithmetic.g4
+  408  ls
+  409  atom .
+  410  antlr4 -Dlanguage=Python3 -visitor arithmetic.g4
+  411  python main.py
+  412  python main.py pudim.txt
+  413  python main.py pudim.txt
+  414  antlr4 -Dlanguage=Python3 -visitor arithmetic.g4
+  415  grun python main.py -gui
+  416  antlr4 -Dlanguage=Python3 -visitor arithmetic.g4
+  417  python main.py pudim.txt
+  418  antlr4 -Dlanguage=Python3 -visitor arithmetic.g4
+  419  python main.py pudim.txt
+  420  antlr4 -Dlanguage=Python3 -visitor arithmetic.g4
+  421  python main.py pudim.txt
+  422  antlr4 -Dlanguage=Python3 -visitor arithmetic.g4
+  423  python main.py pudim.txt
+  424  antlr4 -Dlanguage=Java arithmetic.g4
+  425  ls
+  426  ./pycharm.sh
+  427  source env/bin/activate
+  428  antlr4 -Dlanguage=Python3 arithmetic.g4
+  429  atom .
+  430  antlr4 -Dlanguage=Python3 arithmetic.g4 history > ton.txt
+  431  history > ton.txt
