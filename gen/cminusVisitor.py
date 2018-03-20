@@ -109,13 +109,8 @@ class cminusVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by cminusParser#addsub.
-    def visitAddsub(self, ctx:cminusParser.AddsubContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by cminusParser#term.
-    def visitTerm(self, ctx:cminusParser.TermContext):
+    # Visit a parse tree produced by cminusParser#soma_expressao.
+    def visitSoma_expressao(self, ctx:cminusParser.Soma_expressaoContext):
         return self.visitChildren(ctx)
 
 

@@ -106,8 +106,8 @@ grammar cminus;
     ;
 
   soma_expressao
-    : soma_expressao op=('+'|'-') termo     # addsub
-    | termo                                             # term
+    : soma_expressao op=('+'|'-') termo
+    | termo
     ;
 
 

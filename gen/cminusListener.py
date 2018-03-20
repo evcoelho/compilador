@@ -188,21 +188,12 @@ class cminusListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by cminusParser#addsub.
-    def enterAddsub(self, ctx:cminusParser.AddsubContext):
+    # Enter a parse tree produced by cminusParser#soma_expressao.
+    def enterSoma_expressao(self, ctx:cminusParser.Soma_expressaoContext):
         pass
 
-    # Exit a parse tree produced by cminusParser#addsub.
-    def exitAddsub(self, ctx:cminusParser.AddsubContext):
-        pass
-
-
-    # Enter a parse tree produced by cminusParser#term.
-    def enterTerm(self, ctx:cminusParser.TermContext):
-        pass
-
-    # Exit a parse tree produced by cminusParser#term.
-    def exitTerm(self, ctx:cminusParser.TermContext):
+    # Exit a parse tree produced by cminusParser#soma_expressao.
+    def exitSoma_expressao(self, ctx:cminusParser.Soma_expressaoContext):
         pass
 
 

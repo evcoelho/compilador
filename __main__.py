@@ -5,7 +5,7 @@ from antlr4.InputStream import InputStream
 from gen.cminusLexer import cminusLexer
 from gen.cminusParser import cminusParser
 from gen.cminusVisitor import cminusVisitor
-#from createAST import createAST
+from createAST import CriarAst
 
 
 
@@ -19,6 +19,8 @@ def main(argv):
     for token in stream.tokens:
         print(token.line, ":", token.text)
 
+    AST = CriarAst().visit(tree)
 
+    print(AST)
 if __name__ == '__main__':
     main(sys.argv)

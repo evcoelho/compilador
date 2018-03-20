@@ -1714,66 +1714,30 @@ class cminusParser ( Parser ):
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+            self.op = None # Token
+
+        def termo(self):
+            return self.getTypedRuleContext(cminusParser.TermoContext,0)
+
+
+        def soma_expressao(self):
+            return self.getTypedRuleContext(cminusParser.Soma_expressaoContext,0)
 
 
         def getRuleIndex(self):
             return cminusParser.RULE_soma_expressao
 
-     
-        def copyFrom(self, ctx:ParserRuleContext):
-            super().copyFrom(ctx)
-
-
-    class AddsubContext(Soma_expressaoContext):
-
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a cminusParser.Soma_expressaoContext
-            super().__init__(parser)
-            self.op = None # Token
-            self.copyFrom(ctx)
-
-        def soma_expressao(self):
-            return self.getTypedRuleContext(cminusParser.Soma_expressaoContext,0)
-
-        def termo(self):
-            return self.getTypedRuleContext(cminusParser.TermoContext,0)
-
-
         def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterAddsub" ):
-                listener.enterAddsub(self)
+            if hasattr( listener, "enterSoma_expressao" ):
+                listener.enterSoma_expressao(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitAddsub" ):
-                listener.exitAddsub(self)
+            if hasattr( listener, "exitSoma_expressao" ):
+                listener.exitSoma_expressao(self)
 
         def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitAddsub" ):
-                return visitor.visitAddsub(self)
-            else:
-                return visitor.visitChildren(self)
-
-
-    class TermContext(Soma_expressaoContext):
-
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a cminusParser.Soma_expressaoContext
-            super().__init__(parser)
-            self.copyFrom(ctx)
-
-        def termo(self):
-            return self.getTypedRuleContext(cminusParser.TermoContext,0)
-
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterTerm" ):
-                listener.enterTerm(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitTerm" ):
-                listener.exitTerm(self)
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitTerm" ):
-                return visitor.visitTerm(self)
+            if hasattr( visitor, "visitSoma_expressao" ):
+                return visitor.visitSoma_expressao(self)
             else:
                 return visitor.visitChildren(self)
 
@@ -1789,10 +1753,6 @@ class cminusParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            localctx = cminusParser.TermContext(self, localctx)
-            self._ctx = localctx
-            _prevctx = localctx
-
             self.state = 216
             self.termo(0)
             self._ctx.stop = self._input.LT(-1)
@@ -1804,7 +1764,7 @@ class cminusParser ( Parser ):
                     if self._parseListeners is not None:
                         self.triggerExitRuleEvent()
                     _prevctx = localctx
-                    localctx = cminusParser.AddsubContext(self, cminusParser.Soma_expressaoContext(self, _parentctx, _parentState))
+                    localctx = cminusParser.Soma_expressaoContext(self, _parentctx, _parentState)
                     self.pushNewRecursionContext(localctx, _startState, self.RULE_soma_expressao)
                     self.state = 218
                     if not self.precpred(self._ctx, 2):
