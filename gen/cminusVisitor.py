@@ -1,9 +1,9 @@
-# Generated from /home/everton/Documentos/compiladores/MeuCompilador/cminus.g4 by ANTLR 4.7
+# Generated from /home/everton/Documentos/compiladores/compilador/cminus.g4 by ANTLR 4.7
 from antlr4 import *
 if __name__ is not None and "." in __name__:
     from .cminusParser import cminusParser
 else:
-    from .cminusParser import cminusParser
+    from cminusParser import cminusParser
 
 # This class defines a complete generic visitor for a parse tree produced by cminusParser.
 
@@ -109,28 +109,18 @@ class cminusVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by cminusParser#relacional.
-    def visitRelacional(self, ctx:cminusParser.RelacionalContext):
+    # Visit a parse tree produced by cminusParser#addsub.
+    def visitAddsub(self, ctx:cminusParser.AddsubContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by cminusParser#soma_expressao.
-    def visitSoma_expressao(self, ctx:cminusParser.Soma_expressaoContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by cminusParser#soma.
-    def visitSoma(self, ctx:cminusParser.SomaContext):
+    # Visit a parse tree produced by cminusParser#term.
+    def visitTerm(self, ctx:cminusParser.TermContext):
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by cminusParser#termo.
     def visitTermo(self, ctx:cminusParser.TermoContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by cminusParser#mult.
-    def visitMult(self, ctx:cminusParser.MultContext):
         return self.visitChildren(ctx)
 
 

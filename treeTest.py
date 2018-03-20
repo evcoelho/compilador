@@ -1,9 +1,10 @@
 import sys
 import re
-from antlr4 import *
-from cminusLexer import cminusLexer
-from cminusParser import cminusParser
-from cminusListener import cminusListener
+#from antlr4 import *
+import antlr4
+from gen.cminusLexer import cminusLexer
+from gen.cminusParser import cminusParser
+from gen.cminusListener import cminusListener
 
 IDENT_SIZE = 1
 
@@ -193,9 +194,9 @@ class printTree(cminusListener):
 
 
 def main(argv):
-    input = FileStream(argv[1])
+    input = antlr4.FileStream(argv[1])
     lexer = cminusLexer(input)
-    stream = CommonTokenStream(lexer)
+    stream = antlr4.CommonTokenStream(lexer)
     parser = cminusParser(stream)
     tree = parser.programa()
     #tree_str = tree.toStringTree(recog=parser)

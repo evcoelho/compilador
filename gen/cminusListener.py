@@ -1,4 +1,4 @@
-# Generated from /home/everton/Documentos/compiladores/MeuCompilador/cminus.g4 by ANTLR 4.7
+# Generated from /home/everton/Documentos/compiladores/compilador/cminus.g4 by ANTLR 4.7
 from antlr4 import *
 if __name__ is not None and "." in __name__:
     from .cminusParser import cminusParser
@@ -188,30 +188,21 @@ class cminusListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by cminusParser#relacional.
-    def enterRelacional(self, ctx:cminusParser.RelacionalContext):
+    # Enter a parse tree produced by cminusParser#addsub.
+    def enterAddsub(self, ctx:cminusParser.AddsubContext):
         pass
 
-    # Exit a parse tree produced by cminusParser#relacional.
-    def exitRelacional(self, ctx:cminusParser.RelacionalContext):
-        pass
-
-
-    # Enter a parse tree produced by cminusParser#soma_expressao.
-    def enterSoma_expressao(self, ctx:cminusParser.Soma_expressaoContext):
-        pass
-
-    # Exit a parse tree produced by cminusParser#soma_expressao.
-    def exitSoma_expressao(self, ctx:cminusParser.Soma_expressaoContext):
+    # Exit a parse tree produced by cminusParser#addsub.
+    def exitAddsub(self, ctx:cminusParser.AddsubContext):
         pass
 
 
-    # Enter a parse tree produced by cminusParser#soma.
-    def enterSoma(self, ctx:cminusParser.SomaContext):
+    # Enter a parse tree produced by cminusParser#term.
+    def enterTerm(self, ctx:cminusParser.TermContext):
         pass
 
-    # Exit a parse tree produced by cminusParser#soma.
-    def exitSoma(self, ctx:cminusParser.SomaContext):
+    # Exit a parse tree produced by cminusParser#term.
+    def exitTerm(self, ctx:cminusParser.TermContext):
         pass
 
 
@@ -221,15 +212,6 @@ class cminusListener(ParseTreeListener):
 
     # Exit a parse tree produced by cminusParser#termo.
     def exitTermo(self, ctx:cminusParser.TermoContext):
-        pass
-
-
-    # Enter a parse tree produced by cminusParser#mult.
-    def enterMult(self, ctx:cminusParser.MultContext):
-        pass
-
-    # Exit a parse tree produced by cminusParser#mult.
-    def exitMult(self, ctx:cminusParser.MultContext):
         pass
 
 

@@ -1,4 +1,4 @@
-# Generated from /home/everton/Documentos/compiladores/MeuCompilador/cminus.g4 by ANTLR 4.7
+# Generated from /home/everton/Documentos/compiladores/compilador/cminus.g4 by ANTLR 4.7
 from antlr4 import *
 from io import StringIO
 from typing.io import TextIO
@@ -66,7 +66,7 @@ def serializedATN():
         buf.write("\b\35\2\2\u009c:\3\2\2\2\u009d\u009f\t\4\2\2\u009e\u009d")
         buf.write("\3\2\2\2\u009f\u00a0\3\2\2\2\u00a0\u009e\3\2\2\2\u00a0")
         buf.write("\u00a1\3\2\2\2\u00a1\u00a2\3\2\2\2\u00a2\u00a3\b\36\2")
-        buf.write("\2\u00a3<\3\2\2\2\7\2\u0088\u008d\u0095\u00a0\3\2\3\2")
+        buf.write("\2\u00a3<\3\2\2\2\7\2\u0088\u008d\u0095\u00a0\3\b\2\2")
         return buf.getvalue()
 
 
