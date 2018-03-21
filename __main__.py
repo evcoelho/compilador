@@ -1,12 +1,9 @@
 import sys
-import re
 from antlr4 import *
-from antlr4.InputStream import InputStream
-from gen.cminusLexer import cminusLexer
-from gen.cminusParser import cminusParser
-from gen.cminusVisitor import cminusVisitor
-from createAST import CriarAst
-
+from project.gen.cminusLexer import cminusLexer
+from project.gen.cminusParser import cminusParser
+from project.createAST import CriarAst
+from project.printAst import printAst
 
 
 def main(argv):
@@ -19,8 +16,12 @@ def main(argv):
     for token in stream.tokens:
         print(token.line, ":", token.text)
 
-    AST = CriarAst().visit(tree)
+    ast = CriarAst().visit(tree)
 
-    print(AST)
+    print(ast)
+
+    printAst.visit(ast)
+
+
 if __name__ == '__main__':
     main(sys.argv)

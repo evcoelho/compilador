@@ -17,15 +17,6 @@ class cminusListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by cminusParser#declaracao_lista.
-    def enterDeclaracao_lista(self, ctx:cminusParser.Declaracao_listaContext):
-        pass
-
-    # Exit a parse tree produced by cminusParser#declaracao_lista.
-    def exitDeclaracao_lista(self, ctx:cminusParser.Declaracao_listaContext):
-        pass
-
-
     # Enter a parse tree produced by cminusParser#declaracao.
     def enterDeclaracao(self, ctx:cminusParser.DeclaracaoContext):
         pass
@@ -221,15 +212,6 @@ class cminusListener(ParseTreeListener):
 
     # Exit a parse tree produced by cminusParser#ativacao.
     def exitAtivacao(self, ctx:cminusParser.AtivacaoContext):
-        pass
-
-
-    # Enter a parse tree produced by cminusParser#arg_lista.
-    def enterArg_lista(self, ctx:cminusParser.Arg_listaContext):
-        pass
-
-    # Exit a parse tree produced by cminusParser#arg_lista.
-    def exitArg_lista(self, ctx:cminusParser.Arg_listaContext):
         pass
 
 

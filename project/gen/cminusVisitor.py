@@ -14,11 +14,6 @@ class cminusVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by cminusParser#declaracao_lista.
-    def visitDeclaracao_lista(self, ctx:cminusParser.Declaracao_listaContext):
-        return self.visitChildren(ctx)
-
-
     # Visit a parse tree produced by cminusParser#declaracao.
     def visitDeclaracao(self, ctx:cminusParser.DeclaracaoContext):
         return self.visitChildren(ctx)
@@ -126,11 +121,6 @@ class cminusVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by cminusParser#ativacao.
     def visitAtivacao(self, ctx:cminusParser.AtivacaoContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by cminusParser#arg_lista.
-    def visitArg_lista(self, ctx:cminusParser.Arg_listaContext):
         return self.visitChildren(ctx)
 
 

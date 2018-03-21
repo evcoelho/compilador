@@ -4,13 +4,9 @@ grammar cminus;
 /* Parser Rules */
 
  programa
-    : declaracao_lista
+    : (decl+=declaracao)+
     ;
 
-  declaracao_lista
-    : declaracao_lista declaracao
-    | declaracao
-    ;
 
   declaracao
     : var_declaracao
@@ -47,20 +43,15 @@ grammar cminus;
     ;
 
   composto_decl
-    : LCBRACKET local_declaracoes statement_lista RCBRACKET
-    | LCBRACKET local_declaracoes RCBRACKET
-    | LCBRACKET statement_lista RCBRACKET
-    | LCBRACKET RCBRACKET
+    : LCBRACKET (l_decl+=local_declaracoes)* (stm_list+=statement_lista)* RCBRACKET
     ;
 
   local_declaracoes
-    : local_declaracoes var_declaracao
-    | var_declaracao
+    : (var_decl+=var_declaracao)+
     ;
 
   statement_lista
-    : statement_lista statement
-    | statement
+    : (stms+=statement)+
     ;
 
   statement
@@ -72,13 +63,11 @@ grammar cminus;
     ;
 
   expressao_decl
-    : expressao SEMI
-    | SEMI
+    : expressao? SEMI
     ;
 
   selecao_decl
-    : IF LPAREN expressao RPAREN corpoIF=statement
-    | IF LPAREN expressao RPAREN corpoIF=statement ELSE corpoElse=statement
+    : IF LPAREN condicao=expressao RPAREN corpoIF+=statement* (ELSE corpoElse+=statement* )?
     ;
 
   iteracao_decl
@@ -125,13 +114,8 @@ grammar cminus;
     ;
 
   ativacao
-    : ID LPAREN arg_lista RPAREN
+    : ID LPAREN (arg_list+=expressao COMMA)* (arg_list+=expressao) RPAREN
     | ID LPAREN RPAREN
-    ;
-
-  arg_lista
-    : arg_lista COMMA expressao
-    | expressao
     ;
 
     /* Lexer Rules */
