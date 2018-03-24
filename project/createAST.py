@@ -173,7 +173,7 @@ class CriarAst(cminusVisitor):
         return TipoEsp(
                 tipoE_=ctx.getText(),
                 line=ctx.start.line,
-            )
+        )
 
     # Visit a parse tree produced by cminusParser#fun_declaracao.
     def visitFun_declaracao(self, ctx: cminusParser.Fun_declaracaoContext):
@@ -326,7 +326,7 @@ class CriarAst(cminusVisitor):
                 dir=self.visit(ctx.direita),
                 line=ctx.start.line,
             )
-        return  self.visit(ctx.operacao)
+        return self.visit(ctx.operacao)
 
         # Visit a parse tree produced by cminusParser#soma_expressao.
 
@@ -363,7 +363,7 @@ class CriarAst(cminusVisitor):
     # Visit a parse tree produced by cminusParser#ativacao.
     def visitAtivacao(self, ctx: cminusParser.AtivacaoContext):
         return Ativ(
-            id_=ctx.ID().getText,
+            id_=ctx.ID(),
             argLista=[self.visit(args) for args in ctx.arg_list] if ctx.expressao() is not None else None,
             line=ctx.start.line,
         )

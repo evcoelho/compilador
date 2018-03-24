@@ -114,8 +114,7 @@ grammar cminus;
     ;
 
   ativacao
-    : ID LPAREN (arg_list+=expressao COMMA)* (arg_list+=expressao) RPAREN
-    | ID LPAREN RPAREN
+    : ID LPAREN (arg_list+=expressao COMMA)* (arg_list+=expressao)? RPAREN
     ;
 
     /* Lexer Rules */
