@@ -225,7 +225,6 @@ class printAst(createAST.AstVisitor):
         print('|' * self.ident, '}')
 
         self.ident -= IND
-        return
 
 
 

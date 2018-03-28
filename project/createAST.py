@@ -137,7 +137,7 @@ class numero(AstNo):
         self.num = int(num)
 
 
-class CriarAst(cminusVisitor):
+class CreateAst(cminusVisitor):
     # Visit a parse tree produced by cminusParser#programa.
     def visitPrograma(self, ctx: cminusParser.ProgramaContext):
         return Programa(
