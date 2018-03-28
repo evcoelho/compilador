@@ -7,7 +7,6 @@ from project.gen.cminusLexer import cminusLexer
 from project.gen.cminusParser import cminusParser
 from project.createAST import CreateAst
 from project.printAst import printAst
-from project.print_ast_json import print_ast_json
 from project.semanticAnalysis import semanticAnalysisTableG
 
 
@@ -41,7 +40,7 @@ def main(argv):
         print(semantic)
 
     if semantic.errors:
-        print('Errors')
+        print('Errors:')
         for error in semantic.errors:
             print(error)
 

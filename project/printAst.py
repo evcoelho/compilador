@@ -79,8 +79,14 @@ class printAst(createAST.AstVisitor):
 
 
     def visit_Param(self, no: createAST.Param):
+        self.ident += IND
 
-        print('|' * self.ident, "tipo:", self.visit(no.tipoEsp), " id:", no.id_)
+        if no.flagVet:
+            print('|' * self.ident, "tipo:", self.visit(no.tipoEsp), "id:", no.id_, "[]")
+        else:
+            print('|' * self.ident, "tipo:", self.visit(no.tipoEsp), " id:", no.id_)
+
+        self.ident -= IND
 
     def visit_CompDecl(self, no: createAST.CompDecl):
         for decls in no.localDecl:
@@ -95,6 +101,10 @@ class printAst(createAST.AstVisitor):
     def visit_StatementLista(self, no: createAST.StatementLista):
         for stm in no.stm:
             self.visit(stm)
+
+    def visit_Stm(self, no: createAST.Stm):
+        if no.child:
+            self.visit(no.child)
 
     def visit_ExpressaoDecl(self, no: createAST.ExpressaoDecl):
         if no.exp:
@@ -196,19 +206,27 @@ class printAst(createAST.AstVisitor):
 
     def visit_Operacao(self, no: createAST.Operacao):
         self.ident += IND
-
-        print('|' * self.ident, "operacao:{")
-        self.visit(no.esq)
-        print('|' * self.ident, no.op)
-        self.visit(no.dir)
-        print('|' * self.ident, '}')
-
+        if no.op:
+            print('|' * self.ident, "operacao:{")
+            self.visit(no.esq)
+            print('|' * self.ident, no.op)
+            self.visit(no.dir)
+            print('|' * self.ident, '}')
+        else:
+            self.visit(no.dir)
         self.ident -= IND
 
-    def visit_numero(self, no: createAST.numero):
+    def visit_fat(self, no: createAST.fat):
         self.ident += IND
 
-        print('|' * self.ident, "Numero:", no.num)
+        if no.num:
+            print('|' * self.ident, "Numero:", no.num)
+        elif no.variavel:
+            self.visit(no.variavel)
+        elif no.ativacao:
+            self.visit(no.ativacao)
+        elif no.expressao:
+            self.visit(no.expressao)
 
         self.ident -= IND
 

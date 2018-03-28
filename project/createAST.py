@@ -52,10 +52,11 @@ class ListaParametros(AstNo):
         self.param = param
  
 class Param(AstNo):
-    def __init__(self, tipoEsp, id_, line = -1):
+    def __init__(self, tipoEsp, id_, flagVet=None, line = -1):
         super().__init__(line)
         self.tipoEsp = tipoEsp
         self.id_ = id_
+        self.flagVet = flagVet
         
 class CompDecl(AstNo):
     def __init__(self, localDecl, stmLista, line = -1):
@@ -72,6 +73,11 @@ class StatementLista(AstNo):
     def __init__(self, stm, line = -1):
         super().__init__(line)
         self.stm = stm
+
+class Stm(AstNo):
+    def __init__(self, child, line = -1):
+        super().__init__(line)
+        self.child = child
 
 class ExpressaoDecl(AstNo):
     def __init__(self, exp, line = -1):
@@ -131,10 +137,13 @@ class Ativ(AstNo):
         self.argLista = argLista
 
 
-class numero(AstNo):
-    def __init__(self, num, line = -1):
+class fat(AstNo):
+    def __init__(self, num, variavel, ativacao, expressao, line = -1):
         super().__init__(line)
-        self.num = int(num)
+        self.num = num
+        self.variavel = variavel
+        self.ativacao = ativacao
+        self.expressao = expressao
 
 
 class CreateAst(cminusVisitor):
@@ -216,7 +225,8 @@ class CreateAst(cminusVisitor):
         return Param(
             tipoEsp=self.visit(ctx.tipo_especificador()),
             id_=ctx.ID().getText(),
-            line=ctx.start.line
+            flagVet=True if ctx.LSBRACKET() else False,
+            line=ctx.start.line,
         )
 
     # Visit a parse tree produced by cminusParser#composto_decl.
@@ -243,7 +253,22 @@ class CreateAst(cminusVisitor):
 
     # Visit a parse tree produced by cminusParser#statement.
     def visitStatement(self, ctx: cminusParser.StatementContext):
-        return self.visitChildren(ctx)
+        if ctx.expressao_decl():
+            return Stm(child=self.visit(ctx.expressao_decl()),
+                       line=ctx.start.line,
+                       )
+        elif ctx.composto_decl():
+            return Stm(child=self.visit(ctx.composto_decl()),
+                       line=ctx.start.line,)
+        elif ctx.selecao_decl():
+            return Stm(child=self.visit(ctx.selecao_decl()),
+                       line=ctx.start.line,)
+        elif ctx.iteracao_decl():
+            return Stm(child=self.visit(ctx.iteracao_decl()),
+                       line=ctx.start.line,)
+        elif ctx.retorno_decl():
+            return Stm(child=self.visit(ctx.retorno_decl()),
+                       line=ctx.start.line,)
 
     # Visit a parse tree produced by cminusParser#expressao_decl.
     def visitExpressao_decl(self, ctx: cminusParser.Expressao_declContext):
@@ -319,51 +344,49 @@ class CreateAst(cminusVisitor):
 
     # Visit a parse tree produced by cminusParser#simples_expressao.
     def visitSimples_expressao(self, ctx: cminusParser.Simples_expressaoContext):
-        if ctx.relacional:
-            return Comp(
-                esq=self.visit(ctx.esquerda),
-                relacional=ctx.relacional.text,
-                dir=self.visit(ctx.direita),
-                line=ctx.start.line,
-            )
-        return self.visit(ctx.operacao)
+        return Comp(
+            esq=self.visit(ctx.esquerda) if ctx.esquerda else None,
+            relacional=ctx.relacional.text if ctx.relacional else None,
+            dir=self.visit(ctx.direita) if ctx.direita else None,
+            operacao=self.visit(ctx.operacao) if ctx.operacao else None,
+            line=ctx.start.line,
+        )
+
 
         # Visit a parse tree produced by cminusParser#soma_expressao.
 
     def visitSoma_expressao(self, ctx: cminusParser.Soma_expressaoContext):
-        if ctx.op:
-            return Operacao(
-                esq=self.visit(ctx.soma_expressao()),
-                op=ctx.op.text,
-                dir=self.visit(ctx.termo()),
-                line=ctx.start.line,
-            )
-        return self.visit(ctx.termo())
+        return Operacao(
+            esq=self.visit(ctx.soma_expressao()) if ctx.soma_expressao() else None,
+            op=ctx.op.text if ctx.op else None,
+            dir=self.visit(ctx.termo()) if ctx.termo() else None,
+            line=ctx.start.line,
+        )
 
     # Visit a parse tree produced by cminusParser#termo.
     def visitTermo(self, ctx: cminusParser.TermoContext):
-        if ctx.op:
-            return Operacao(
-                esq=self.visit(ctx.termo()),
-                op=ctx.op.text,
-                dir=self.visit(ctx.fator()),
-                line = ctx.start.line,
-            )
-        return self.visit(ctx.fator())
+        return Operacao(
+            esq=self.visit(ctx.termo()) if ctx.termo() else None,
+            op=ctx.op.text if ctx.op else None,
+            dir=self.visit(ctx.fator()) if ctx.fator() else None,
+            line = ctx.start.line,
+        )
 
     # Visit a parse tree produced by cminusParser#fator.
     def visitFator(self, ctx: cminusParser.FatorContext):
-        if ctx.NUM():
-            return numero(
-                num=ctx.NUM().getText(),
-                line=ctx.start.line,
-            )
-        return self.visitChildren(ctx)
+        return fat(
+            num=ctx.NUM().getText() if ctx.NUM() else None,
+            variavel=self.visit(ctx.var()) if ctx.var() else None,
+            ativacao=self.visit(ctx.ativacao()) if ctx.ativacao() else None,
+            expressao=self.visit(ctx.expressao()) if ctx.expressao() else None,
+            line=ctx.start.line,
+        )
+
 
     # Visit a parse tree produced by cminusParser#ativacao.
     def visitAtivacao(self, ctx: cminusParser.AtivacaoContext):
         return Ativ(
-            id_=ctx.ID(),
+            id_=ctx.ID().getText(),
             argLista=[self.visit(args) for args in ctx.arg_list] if ctx.expressao() is not None else None,
             line=ctx.start.line,
         )
