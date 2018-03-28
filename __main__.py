@@ -15,9 +15,9 @@ def main(argv):
     parser = cminusParser(stream)
     tree = parser.programa()
 
-    """for token in stream.tokens:
+    for token in stream.tokens:
         print(token.line, ":", token.text)
-    """
+
     ast = CriarAst().visit(tree)
 
     printAst().visit(ast)
