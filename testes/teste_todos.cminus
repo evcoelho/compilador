@@ -1,0 +1,54 @@
+int gdc(int u, int v){
+    /*FULL SEM ERRO*/
+    if(v==0){
+        return u;
+    } 
+    else{
+        return gdc(v,u-u/v*v);
+    }
+}
+
+void testeFunct(int x){ // ----------
+}
+
+void testeFunct(int x, void erro){ // ----------
+}
+
+void erroTipo(void){ // ----------
+
+}
+
+/*asdasd*/
+
+void mainAux(void)
+{
+    int x;
+    int u;
+    int u; // ----------
+    int y;
+    int v[10];
+    int varInt;
+    int testeFunct; // ----------
+    void erro; // ----------
+    varInt = erroTipo();
+    a=fun();
+    y=input();
+    output(gdc(x,y));
+    u=0; 
+    x=1;
+    while(x<=10)
+    {
+        u=u+1;  
+        v[i]=u;
+        x=x+1; 
+    } 
+    return;
+}
+
+/*
+void main(void){
+    mainAux();
+    return ;
+}
+*/
+
