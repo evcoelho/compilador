@@ -64,7 +64,8 @@ class semanticAnalysisTableG(createAST.AstVisitor):
             self.table[name] = Symbol(no.id_, self._scope, no.line, 'var', no.tipo.tipoE)
         return True
 
-    """def visit_TipoEsp(self, no: createAST.TipoEsp):
+    """
+    def visit_TipoEsp(self, no: createAST.TipoEsp):
         return
     """
     def visit_FunDecl(self, no: createAST.FunDecl):
@@ -153,7 +154,20 @@ class semanticAnalysisTableG(createAST.AstVisitor):
             self.visit(no.simplesExpressao)
         else:
             self.visit(no.var)
+            if no.expressao.simplesExpressao:
+                if no.expressao.simplesExpressao.operacao:
+                    if no.expressao.simplesExpressao.operacao.dir:
+                        if no.expressao.simplesExpressao.operacao.dir.dir:
+                            if no.expressao.simplesExpressao.operacao.dir.dir.ativacao:
+                                func = no.expressao.simplesExpressao.operacao.dir.dir.ativacao.id_
+                                if func in self.table:
+                                    if self.table[func].canonical_type == 'void':
+                                        self.errors.append(f'{no.line}: Invalid Assignment of Type "void"')
             self.visit(no.expressao)
+
+
+
+
 
     def visit_Variavel(self, no: createAST.Variavel):
         name = self.scoped_name(no.id_)
