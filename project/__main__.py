@@ -7,7 +7,7 @@ from project.gen.cminusLexer import cminusLexer
 from project.gen.cminusParser import cminusParser
 from project.createAST import CreateAst
 from project.printAst import printAst
-from project.semanticAnalysis import semanticAnalysisTableG
+from project.semanticAnalysis import SemanticAnalysisTableG
 
 
 def main(argv):
@@ -34,7 +34,7 @@ def main(argv):
     if args.ast:
         printAst().visit(ast)
 
-    semantic = semanticAnalysisTableG(ast)
+    semantic = SemanticAnalysisTableG(ast)
 
     if args.symbol:
         print(semantic)

@@ -4,18 +4,21 @@ from project import createAST
 
 
 class Symbol:
-    def __init__(self, name, scope, line, id_type, canonical_type):
+    def __init__(self, name, scope, line, id_type, canonical_type, pos_mem=-1):
         self.name = name
         self.scope = scope
         self.lines = {line}
         self.id_type = id_type
         self.canonical_type = canonical_type
+        self.pos_mem = pos_mem
 
     def as_tuple(self):
-        return self.name, self.scope, ', '.join(map(str, sorted(self.lines))), self.id_type, self.canonical_type
+        return self.name, self.scope, ', '.join(map(str, sorted(self.lines))), self.id_type, self.canonical_type, self.pos_mem
 
 
-class semanticAnalysisTableG(createAST.AstVisitor):
+class SemanticAnalysisTableG(createAST.AstVisitor):
+    count_pos_mem = 0
+
     def __init__(self, ast_):
         self.table = {}
         self.errors = []
@@ -29,7 +32,7 @@ class semanticAnalysisTableG(createAST.AstVisitor):
     def __str__(self):
         return tabulate(
             tabular_data=[(key,) + symbol.as_tuple() for key, symbol in self.table.items()],
-            headers=['Key', 'Name', 'Scope', 'Lines', 'Id Type', 'Data Type'],
+            headers=['Key', 'Name', 'Scope', 'Lines', 'Id Type', 'Data Type', 'Pos Mem'],
             tablefmt='grid',
         )
 
@@ -59,9 +62,11 @@ class semanticAnalysisTableG(createAST.AstVisitor):
             self.errors.append(f'{no.line}: Void variable cannot be declared')
 
         if no.num:
-            self.table[name] = Symbol(no.id_, self._scope, no.line, 'var[]', no.tipo.tipoE)
+            self.table[name] = Symbol(no.id_, self._scope, no.line, f'var[{no.num}]', no.tipo.tipoE, self.count_pos_mem)
+            self.count_pos_mem += int(no.num)
         else:
-            self.table[name] = Symbol(no.id_, self._scope, no.line, 'var', no.tipo.tipoE)
+            self.table[name] = Symbol(no.id_, self._scope, no.line, 'var', no.tipo.tipoE, self.count_pos_mem)
+            self.count_pos_mem += 1
         return True
 
     """
@@ -102,9 +107,11 @@ class semanticAnalysisTableG(createAST.AstVisitor):
             self.errors.append(f'{no.line}: Cannot declare void variable')
 
         if no.flagVet:
-            self.table[name] = Symbol(no.id_, self._scope, no.line, 'var[]', no.tipoEsp.tipoE)
+            self.table[name] = Symbol(no.id_, self._scope, no.line, 'var[]', no.tipoEsp.tipoE, self.count_pos_mem)
+            self.count_pos_mem += 1
         else:
-            self.table[name] = Symbol(no.id_, self._scope, no.line, 'var', no.tipoEsp.tipoE)
+            self.table[name] = Symbol(no.id_, self._scope, no.line, 'var', no.tipoEsp.tipoE, self.count_pos_mem)
+            self.count_pos_mem += 1
 
     def visit_CompDecl(self, no: createAST.CompDecl):
         if no.localDecl:

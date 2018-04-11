@@ -31,6 +31,8 @@ void main(void)
    int y;
    int u;
    int v[10];
+   int k;
+   int j;
 
    u = output(x); /* erro semantico: valor de retorno de funcao eh void */
 

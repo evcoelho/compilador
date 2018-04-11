@@ -5,7 +5,7 @@ IND = 2
 class printAst(createAST.AstVisitor):
     def __init__(self):
         super().__init__()
-        self.ident=0
+        self.ident = 0
 
     def visit_Programa(self, no: createAST.Programa):
         self.ident += IND
