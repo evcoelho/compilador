@@ -150,7 +150,7 @@ class printAst(createAST.AstVisitor):
     def visit_ReturnDecl(self, no: createAST.ReturnDecl):
         self.ident += IND
 
-        if no .expressao:
+        if no.expressao:
             print('|' * self.ident,"retorno:{")
             self.visit(no.expressao)
             print('|' * self.ident, '}')

@@ -17,13 +17,13 @@ class Symbol:
 
 
 class SemanticAnalysisTableG(createAST.AstVisitor):
-    count_pos_mem = 0
+
 
     def __init__(self, ast_):
         self.table = {}
         self.errors = []
         self._scope = ''
-
+        self.count_pos_mem = 0
         self.visit(ast_)
 
         if 'main' not in self.table:
@@ -171,9 +171,6 @@ class SemanticAnalysisTableG(createAST.AstVisitor):
                                     if self.table[func].canonical_type == 'void':
                                         self.errors.append(f'{no.line}: Invalid Assignment of Type "void"')
             self.visit(no.expressao)
-
-
-
 
 
     def visit_Variavel(self, no: createAST.Variavel):

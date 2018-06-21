@@ -1,11 +1,12 @@
 int gcd(int u, int v)
 {
-int borin[10];
-if (v==0) return u;
-else return gcd(v, u-u/v*v);
 }
 void main(void)
-{ int x; int y;
-x = input(); y = input();
-output(gcd(x,y));
+{
+    int y;
+    int vet[10];
+    int a;
+    vet[vet[y*13]+2] = vet[6+2]+vet[1];
+
+    a = 1+2;
 }
