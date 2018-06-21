@@ -12,6 +12,7 @@ class intermedCode(createAST.AstVisitor):
         self.intermediario = []
         self.line = -1
         self.temp = 0
+        self.sys_call = ['input', 'output']
         self.visit(ast_)
 
 
@@ -164,10 +165,33 @@ class intermedCode(createAST.AstVisitor):
         elif no.expressao:
             return self.visit(no.expressao)
         elif no.ativacao:
-            self.visit(no.ativacao)
+            return self.visit(no.ativacao)
 
 
     def visit_Ativ(self, no: createAST.Ativ):
         if no.argLista:
+            if no.id_ in self.sys_call:
+                call = 'sys_call'
+            else:
+                call = 'function_call'
+            lista_aux = [call, f'{no.id_}']
             for arg in no.argLista:
-                self.visit(arg)
+                temp = self.visit(arg)
+                lista_aux.append(temp)
+            self.intermediario.append(lista_aux)
+            self.temp += 1
+            if no.id_ != 'output':
+                lista_aux = ['assign_ret', f't{self.temp}', 'RT', '']
+                self.intermediario.append(lista_aux)
+                return f't{self.temp}'
+        elif no.id_:
+            if no.id_ in self.sys_call:
+                call = 'sys_call'
+            else:
+                call = 'function_call'
+            self.temp += 1
+            lista_aux = [call, f'{no.id_}']
+            self.intermediario.append(lista_aux)
+            lista_aux = ['assign_ret', f't{self.temp}', 'RT', '']
+            self.intermediario.append(lista_aux)
+            return f't{self.temp}'

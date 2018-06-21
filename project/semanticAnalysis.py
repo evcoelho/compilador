@@ -24,6 +24,7 @@ class SemanticAnalysisTableG(createAST.AstVisitor):
         self.errors = []
         self._scope = ''
         self.count_pos_mem = 0
+        self.sys_call = ['input', 'output']
         self.visit(ast_)
 
         if 'main' not in self.table:
@@ -213,7 +214,10 @@ class SemanticAnalysisTableG(createAST.AstVisitor):
         name = no.id_
         in_global_scope = name in self.table
         if not in_global_scope:
-            self.errors.append(f'{no.line}: Function "{no.id_}" used without declaration')
+            if name in self.sys_call:
+                self.table[name] = Symbol(name, self._scope, no.line, 'sys_call', 'int')
+            else:
+                self.errors.append(f'{no.line}: Function "{no.id_}" used without declaration')
             return False
         self.table[name].lines.add(no.line)
         for arg in no.argLista:

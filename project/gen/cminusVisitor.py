@@ -1,4 +1,4 @@
-# Generated from cminus.g4 by ANTLR 4.7
+# Generated from /home/everton/Documentos/compiladores/compilador/cminus.g4 by ANTLR 4.7
 from antlr4 import *
 if __name__ is not None and "." in __name__:
     from .cminusParser import cminusParser
