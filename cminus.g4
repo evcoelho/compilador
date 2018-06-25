@@ -67,7 +67,7 @@ grammar cminus;
     ;
 
   selecao_decl
-    : IF LPAREN condicao=expressao RPAREN corpoIF+=statement* (ELSE corpoElse+=statement* )?
+    : IF LPAREN condicao=expressao RPAREN LCBRACKET corpoIF+=statement* RCBRACKET (ELSE LCBRACKET corpoElse+=statement* RCBRACKET)?
     ;
 
   iteracao_decl

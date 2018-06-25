@@ -12,6 +12,7 @@ class intermedCode(createAST.AstVisitor):
         self.intermediario = []
         self.line = -1
         self.temp = 0
+        self.label = 0
         self.sys_call = ['input', 'output']
         self.visit(ast_)
 
@@ -37,6 +38,9 @@ class intermedCode(createAST.AstVisitor):
     """
 
     def visit_FunDecl(self, no: createAST.FunDecl):
+
+        lista_aux = ['function', no.id_, '', '']
+        self.intermediario.append(lista_aux)
         self.visit(no.parametros)
         self.visit(no.declComp)
 
@@ -77,26 +81,63 @@ class intermedCode(createAST.AstVisitor):
             self.visit(no.exp)
 
     def visit_IfDecl(self, no: createAST.IfDecl):
-        self.visit(no.condicao)
+        cond = self.visit(no.condicao)
+        self.label += 1
+        end_if = self.label
+        self.label += 1
+        end_else = self.label
+        lista_aux = ['jump_if_false', cond, f'L{end_if}', '']
+        self.intermediario.append(lista_aux)
+
         if no.corpoElse:
             for ci in no.corpoIf:
                 self.visit(ci)
 
+            lista_aux = ['go_to', f'L{end_else}', '', '']
+            self.intermediario.append(lista_aux)
+
+            lista_aux = ['label', f'L{end_if}', '', '']
+            self.intermediario.append(lista_aux)
             for ce in no.corpoElse:
                 self.visit(ce)
+            lista_aux = ['label', f'L{end_else}', '', '']
+            self.intermediario.append(lista_aux)
+
         else:
             for ci in no.corpoIf:
                 self.visit(ci)
+            lista_aux = ['label', f'L{end_if}', '', '']
+            self.intermediario.append(lista_aux)
+
 
     def visit_WhileDecl(self, no: createAST.WhileDecl):
-        self.visit(no.condicao)
+        self.label += 1
+        label_start = self.label
+        lista_aux = ['label', f'L{label_start}', '', '']
+        self.intermediario.append(lista_aux)
+
+        cond = self.visit(no.condicao)
+        self.label += 1
+        label_end = self.label
+        lista_aux = ['jump_if_false', cond, f'L{label_end}', '']
+        self.intermediario.append(lista_aux)
+
         self.visit(no.corpo)
+        lista_aux = ['go_to', f'L{label_start}', '', '']
+        self.intermediario.append(lista_aux)
+
+        lista_aux = ['label', f'L{label_end}', '', '']
+        self.intermediario.append(lista_aux)
 
 
     def visit_ReturnDecl(self, no: createAST.ReturnDecl):
         if no.expressao:
-            self.visit(no.expressao)
-
+            x = self.visit(no.expressao)
+            lista_aux = ['return', x, '', '']
+            self.intermediario.append(lista_aux)
+        else:
+            lista_aux = ['return', '', '', '']
+            self.intermediario.append(lista_aux)
 
     def visit_Express(self, no: createAST.Express):
         if no.simplesExpressao:
@@ -131,8 +172,28 @@ class intermedCode(createAST.AstVisitor):
         if no.operacao:
             return self.visit(no.operacao)
         else:
-            self.visit(no.esq)
-            self.visit(no.dir)
+            x = self.visit(no.esq)
+            y = self.visit(no.dir)
+
+            self.temp += 1
+            if no.relacional == '<=':
+                operacao = 'less_than_equal_to'
+            elif no.relacional == '>=':
+                operacao = 'greatest_than_equal_to'
+            elif no.relacional == '==':
+                operacao = 'equal_to'
+            elif no.relacional == '!=':
+                operacao = 'diferent_to'
+            elif no.relacional == '<':
+                operacao = 'less_than'
+            elif no.relacional == '>':
+                operacao = 'greatest_than'
+
+            lista_aux = [operacao, x, y, f't{self.temp}']
+            self.intermediario.append(lista_aux)
+            return f't{self.temp}'
+
+
 
     def visit_Operacao(self, no: createAST.Operacao):
         if no.esq:
@@ -159,6 +220,10 @@ class intermedCode(createAST.AstVisitor):
 
     def visit_fat(self, no: createAST.fat):
         if no.num:
+            # self.temp += 1
+            # lista_aux = ['load_imediate', no.num, f't{self.temp}', '']
+            # self.intermediario.append(lista_aux)
+            # return f't{self.temp}'
             return no.num
         elif no.variavel:
             return self.visit(no.variavel)
@@ -169,6 +234,7 @@ class intermedCode(createAST.AstVisitor):
 
 
     def visit_Ativ(self, no: createAST.Ativ):
+        i = 0;
         if no.argLista:
             if no.id_ in self.sys_call:
                 call = 'sys_call'
@@ -176,8 +242,11 @@ class intermedCode(createAST.AstVisitor):
                 call = 'function_call'
             lista_aux = [call, f'{no.id_}']
             for arg in no.argLista:
+                i += 1
                 temp = self.visit(arg)
-                lista_aux.append(temp)
+                self.intermediario.append([f'arg{i}', temp, '', ''])
+            lista_aux.append(i)
+            lista_aux.append('')
             self.intermediario.append(lista_aux)
             self.temp += 1
             if no.id_ != 'output':
