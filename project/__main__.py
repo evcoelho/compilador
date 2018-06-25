@@ -56,8 +56,8 @@ def main(argv):
                 print(' ')
                 print(file.read())
             for i in inter.intermediario:
-                print(cont,' : (', end = '')
-                print(*i, sep = ', ', end = '')
+                print(cont, ' : (', end='')
+                print(*i, sep=', ', end='')
                 print(') ')
                 cont += 1
 
