@@ -3,9 +3,7 @@ from tabulate import tabulate
 from project import createAST
 
 
-
-
-class intermedCode(createAST.AstVisitor):
+class IntermedCode(createAST.AstVisitor):
 
 
     def __init__(self, ast_):
@@ -234,7 +232,7 @@ class intermedCode(createAST.AstVisitor):
 
 
     def visit_Ativ(self, no: createAST.Ativ):
-        i = 0;
+        i = 0
         if no.argLista:
             if no.id_ in self.sys_call:
                 call = 'sys_call'

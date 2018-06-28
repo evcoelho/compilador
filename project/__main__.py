@@ -8,7 +8,8 @@ from project.gen.cminusParser import cminusParser
 from project.createAST import CreateAst
 from project.printAst import printAst
 from project.semanticAnalysis import SemanticAnalysisTableG
-from project.intermedCode import intermedCode
+from project.intermedCode import IntermedCode
+from project.intermediate_to_assembly import IntermediateToAssembly
 
 
 def main(argv):
@@ -49,7 +50,7 @@ def main(argv):
     else:
         if args.intermediate:
             cont = 0
-            inter = intermedCode(ast)
+            inter = IntermedCode(ast)
             print(' ')
             print(args.file,': ')
             with open(args.file, 'r') as file:
@@ -60,6 +61,9 @@ def main(argv):
                 print(*i, sep=', ', end='')
                 print(') ')
                 cont += 1
+            assembly = IntermediateToAssembly(semantic,inter)
+
+
 
 if __name__ == '__main__':
     main(sys.argv)

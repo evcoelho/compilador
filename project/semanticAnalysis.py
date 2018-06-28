@@ -18,7 +18,6 @@ class Symbol:
 
 class SemanticAnalysisTableG(createAST.AstVisitor):
 
-
     def __init__(self, ast_):
         self.table = {}
         self.errors = []
