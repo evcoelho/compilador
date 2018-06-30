@@ -242,7 +242,7 @@ class IntermedCode(createAST.AstVisitor):
             for arg in no.argLista:
                 i += 1
                 temp = self.visit(arg)
-                self.intermediario.append([f'arg{i}', temp, '', ''])
+                self.intermediario.append(['arg', temp, '', ''])
             lista_aux.append(i)
             lista_aux.append('')
             self.intermediario.append(lista_aux)
@@ -257,7 +257,7 @@ class IntermedCode(createAST.AstVisitor):
             else:
                 call = 'function_call'
             self.temp += 1
-            lista_aux = [call, f'{no.id_}']
+            lista_aux = [call, f'{no.id_}', '', '']
             self.intermediario.append(lista_aux)
             lista_aux = ['assign_ret', f't{self.temp}', 'RT', '']
             self.intermediario.append(lista_aux)

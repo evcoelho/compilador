@@ -4,16 +4,19 @@ from project import createAST
 
 
 class Symbol:
-    def __init__(self, name, scope, line, id_type, canonical_type, pos_mem=-1):
+    def __init__(self, name, scope, line, id_type, canonical_type, pos_mem=-1, qtd_args='', args = ''):
         self.name = name
         self.scope = scope
         self.lines = {line}
         self.id_type = id_type
         self.canonical_type = canonical_type
         self.pos_mem = pos_mem
+        self.qtd_args = qtd_args
+        self.args = args
 
     def as_tuple(self):
-        return self.name, self.scope, ', '.join(map(str, sorted(self.lines))), self.id_type, self.canonical_type, self.pos_mem
+        return (self.name, self.scope, ', '.join(map(str, sorted(self.lines))), self.id_type
+                , self.canonical_type, self.pos_mem, self.qtd_args, self.args)
 
 
 class SemanticAnalysisTableG(createAST.AstVisitor):
@@ -25,6 +28,8 @@ class SemanticAnalysisTableG(createAST.AstVisitor):
         self.count_pos_mem = 0
         self.sys_call = ['input', 'output']
         self.visit(ast_)
+        self.count_args = 0
+        self.list_args = []
 
         if 'main' not in self.table:
             self.errors.append(f'No main function declared')
@@ -32,7 +37,7 @@ class SemanticAnalysisTableG(createAST.AstVisitor):
     def __str__(self):
         return tabulate(
             tabular_data=[(key,) + symbol.as_tuple() for key, symbol in self.table.items()],
-            headers=['Key', 'Name', 'Scope', 'Lines', 'Id Type', 'Data Type', 'Pos Mem'],
+            headers=['Key', 'Name', 'Scope', 'Lines', 'Id Type', 'Data Type', 'Pos Mem', 'Qtd Args', 'Args'],
             tablefmt='grid',
         )
 
@@ -63,7 +68,7 @@ class SemanticAnalysisTableG(createAST.AstVisitor):
 
         if no.num:
             if self._scope == '':
-                self.table[name] = Symbol(no.id_, 'global', no.line, f'var[{no.num}]', no.tipo.tipoE, [self.count_pos_mem,self.count_pos_mem+int(no.num)-1])
+                self.table[name] = Symbol(no.id_, 'global', no.line, f'var[{no.num}]', no.tipo.tipoE, [self.count_pos_mem, self.count_pos_mem+int(no.num)-1])
                 self.count_pos_mem += int(no.num)
             else:
                 self.table[name] = Symbol(no.id_, self._scope, no.line, f'var[{no.num}]', no.tipo.tipoE, self.count_pos_mem)
@@ -91,12 +96,16 @@ class SemanticAnalysisTableG(createAST.AstVisitor):
             self.table[no.id_] = Symbol(no.id_, self._scope, no.line, 'funct', no.tipoE.tipoE)
 
         self._scope = no.id_
-        aux = self.count_pos_mem
-        self.count_pos_mem = 0
+        # aux = self.count_pos_mem
+        # self.count_pos_mem = 0
+        self.count_args = 0
+        self.list_args = []
         self.visit(no.parametros)
+        self.table[no.id_].qtd_args = self.count_args
+        self.table[no.id_].args = self.list_args
         self.visit(no.declComp)
-        self.table[no.id_].pos_mem = self.count_pos_mem
-        self.count_pos_mem = aux
+        # self.table[no.id_].pos_mem = self.count_pos_mem
+        # self.count_pos_mem = aux
         self._scope = ''
 
     def visit_Parametros(self, no: createAST.Parametros):
@@ -111,6 +120,8 @@ class SemanticAnalysisTableG(createAST.AstVisitor):
             self.visit(no.param)
 
     def visit_Param(self, no: createAST.Param):
+        self.count_args += 1
+        self.list_args.append(no.id_)
         name = self.scoped_name(no.id_)
         if name in self.table:
             self.errors.append(f'{no.line}: Variable "{no.id_}" already declared')

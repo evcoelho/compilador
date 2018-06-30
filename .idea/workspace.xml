@@ -2,11 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7dc8e40c-6eeb-4584-84b0-f5d1525fac31" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/testes/teste.cminus" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/project/__main__.py" afterPath="$PROJECT_DIR$/project/__main__.py" />
-      <change beforePath="$PROJECT_DIR$/project/printAst.py" afterPath="$PROJECT_DIR$/project/printAst.py" />
+      <change beforePath="$PROJECT_DIR$/project/intermedCode.py" afterPath="$PROJECT_DIR$/project/intermedCode.py" />
+      <change beforePath="$PROJECT_DIR$/project/intermediate_to_assembly.py" afterPath="$PROJECT_DIR$/project/intermediate_to_assembly.py" />
       <change beforePath="$PROJECT_DIR$/project/semanticAnalysis.py" afterPath="$PROJECT_DIR$/project/semanticAnalysis.py" />
-      <change beforePath="$PROJECT_DIR$/testes/teste2.cminus" afterPath="$PROJECT_DIR$/testes/teste2.cminus" />
+      <change beforePath="$PROJECT_DIR$/testes/pudim.txt" afterPath="$PROJECT_DIR$/testes/pudim.txt" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -15,13 +17,43 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DockManager">
+    <window id="1">
+      <content type="file-editors">
+        <state>
+          <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+            <file leaf-file-name="teste.cminus" pinned="false" current-in-tab="false">
+              <entry file="file://$PROJECT_DIR$/testes/teste.cminus">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="306">
+                    <caret line="17" column="10" lean-forward="false" selection-start-line="17" selection-start-column="10" selection-end-line="17" selection-end-column="10" />
+                    <folding />
+                  </state>
+                </provider>
+              </entry>
+            </file>
+            <file leaf-file-name="pudim.txt" pinned="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/testes/pudim.txt">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="288">
+                    <caret line="16" column="10" lean-forward="false" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
+                    <folding />
+                  </state>
+                </provider>
+              </entry>
+            </file>
+          </leaf>
+        </state>
+      </content>
+    </window>
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="semanticAnalysis.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="semanticAnalysis.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/project/semanticAnalysis.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+            <state relative-caret-position="234">
+              <caret line="70" column="123" lean-forward="false" selection-start-line="70" selection-start-column="123" selection-end-line="70" selection-end-column="123" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
               </folding>
@@ -29,22 +61,38 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="createAST.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/project/createAST.py">
+      <file leaf-file-name="intermedCode.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/project/intermedCode.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6539">
-              <caret line="379" column="76" lean-forward="true" selection-start-line="379" selection-start-column="76" selection-end-line="379" selection-end-column="76" />
-              <folding />
+            <state relative-caret-position="174">
+              <caret line="244" column="47" lean-forward="false" selection-start-line="244" selection-start-column="44" selection-end-line="244" selection-end-column="47" />
+              <folding>
+                <element signature="e#0#29#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="printAst.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/project/printAst.py">
+      <file leaf-file-name="intermediate_to_assembly.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/project/intermediate_to_assembly.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="7" column="22" lean-forward="true" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
-              <folding />
+            <state relative-caret-position="-956">
+              <caret line="151" column="47" lean-forward="false" selection-start-line="151" selection-start-column="47" selection-end-line="151" selection-end-column="47" />
+              <folding>
+                <element signature="e#1#33#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__main__.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/project/__main__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="520">
+              <caret line="66" column="21" lean-forward="false" selection-start-line="66" selection-start-column="21" selection-end-line="66" selection-end-column="21" />
+              <folding>
+                <element signature="e#1#11#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -52,31 +100,19 @@
       <file leaf-file-name="cminus.g4" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cminus.g4">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1008">
-              <caret line="83" column="23" lean-forward="true" selection-start-line="83" selection-start-column="23" selection-end-line="83" selection-end-column="23" />
+            <state relative-caret-position="273">
+              <caret line="38" column="0" lean-forward="true" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="teste2.cminus" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/testes/teste2.cminus">
+      <file leaf-file-name="sort.cminus" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/testes/sort.cminus">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="34" column="9" lean-forward="false" selection-start-line="34" selection-start-column="9" selection-end-line="34" selection-end-column="9" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__main__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/project/__main__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="142">
-              <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-              <folding>
-                <element signature="e#1#11#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -92,24 +128,10 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>ex</find>
-      <find>rela</find>
-      <find>super</find>
-      <find>relacional</find>
-      <find>astNo</find>
-      <find>cminusParser</find>
-      <find>Parser</find>
-      <find>dir</find>
-      <find>declaracao_lista</find>
-      <find>id</find>
-      <find>ExpressaoDecl</find>
-      <find>class</find>
       <find>AstNo</find>
       <find>ListaArgumentos</find>
       <find>SUBINDENT</find>
       <find>tipoE</find>
-      <find>params</find>
-      <find>param_lista</find>
       <find>composto_decl</find>
       <find>'|' * self.ident</find>
       <find>pipe</find>
@@ -117,11 +139,25 @@
       <find>print('|' * self.ident, &quot;id:&quot;, no.id_)</find>
       <find>no.id_</find>
       <find>declComp</find>
-      <find>as_tuple</find>
       <find>tabulate</find>
       <find>ativacao</find>
       <find>getText()</find>
       <find>ID()</find>
+      <find>count_pos_mem</find>
+      <find>TipoEsp</find>
+      <find>fun_declaracao</find>
+      <find>num</find>
+      <find>ASSIGN</find>
+      <find>expressao</find>
+      <find>var</find>
+      <find>retorno_decl</find>
+      <find>simples_expressao</find>
+      <find>as_tuple</find>
+      <find>scope</find>
+      <find>arg</find>
+      <find>params</find>
+      <find>param_lista</find>
+      <find>param</find>
     </findStrings>
     <replaceStrings>
       <replace>ctx</replace>
@@ -151,7 +187,6 @@
         <option value="$PROJECT_DIR$/printTree.py" />
         <option value="$PROJECT_DIR$/pudim.txt" />
         <option value="$PROJECT_DIR$/arithmetic.g4" />
-        <option value="$PROJECT_DIR$/testes/pudim.txt" />
         <option value="$PROJECT_DIR$/cminusListener.py" />
         <option value="$PROJECT_DIR$/cminusParser.py" />
         <option value="$PROJECT_DIR$/gen/cminusVisitor.py" />
@@ -165,19 +200,27 @@
         <option value="/media/everton/OS/Users/EvertonCoelho/Downloads/PyCmComp/PyCmComp/abstract_printer.py" />
         <option value="$PROJECT_DIR$/project/print_ast_json.py" />
         <option value="$PROJECT_DIR$/__main__.py" />
-        <option value="$PROJECT_DIR$/cminus.g4" />
         <option value="$PROJECT_DIR$/project/createAST.py" />
         <option value="$PROJECT_DIR$/testes/gdc_lexico1.txt" />
-        <option value="$PROJECT_DIR$/project/printAst.py" />
-        <option value="$PROJECT_DIR$/project/__main__.py" />
         <option value="$PROJECT_DIR$/testes/teste2.cminus" />
+        <option value="$PROJECT_DIR$/project/printAst.py" />
+        <option value="$PROJECT_DIR$/testes/sort.txt" />
+        <option value="$PROJECT_DIR$/testes/sort.cminus" />
+        <option value="$PROJECT_DIR$/cminus.g4" />
+        <option value="$PROJECT_DIR$/testes/teste.cminus" />
+        <option value="$PROJECT_DIR$/project/intermedCode.py" />
+        <option value="$PROJECT_DIR$/project/intermediate_to_assembly.py" />
+        <option value="$PROJECT_DIR$/testes/pudim.txt" />
         <option value="$PROJECT_DIR$/project/semanticAnalysis.py" />
+        <option value="$PROJECT_DIR$/project/__main__.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="1440" />
+    <option name="y" value="428" />
     <option name="width" value="1366" />
-    <option name="height" value="741" />
+    <option name="height" value="768" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -213,7 +256,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -226,16 +268,22 @@
               <item name="compilador" type="462c0819:PsiDirectoryNode" />
               <item name="project" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="compilador" type="b2602c69:ProjectViewProjectNode" />
+              <item name="compilador" type="462c0819:PsiDirectoryNode" />
+              <item name="testes" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/project/gen" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/testes/pudim.txt" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="$PROJECT_DIR$/cminus.g4::/auto-gen" value="false" />
     <property name="$PROJECT_DIR$/cminus.g4::/language" value="Python3" />
     <property name="$PROJECT_DIR$/cminus.g4::/gen-listener" value="true" />
@@ -249,6 +297,7 @@
     <property name="$PROJECT_DIR$/project/cminus.g4::/encoding" value="cminus" />
     <property name="$PROJECT_DIR$/project/cminus.g4::/package" value="cminus" />
     <property name="$PROJECT_DIR$/cminus.g4::/output-dir" value="$PROJECT_DIR$/project/gen" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -294,16 +343,16 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/project" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="false" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="MeuCompilador" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/__main__.py" />
+      <option name="SCRIPT_NAME" value="project" />
       <option name="PARAMETERS" value="testes/gdc_sem_erros.txt" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
+      <option name="MODULE_MODE" value="true" />
     </configuration>
     <configuration default="true" type="Python.Ipnb" factoryName="Jupyter Notebook">
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -380,14 +429,14 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1366" height="741" extended-state="7" />
+    <frame x="1440" y="428" width="1366" height="741" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.183172" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Tool Output" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.47697368" sideWeight="0.51005214" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4161184" sideWeight="0.47580045" order="12" side_tool="true" content_ui="tabs" />
-      <window_info id="ANTLR Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6957237" sideWeight="0.4973939" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="ANTLR Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3536184" sideWeight="0.4973939" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5131579" sideWeight="0.52419955" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -479,26 +528,10 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/pudim.txt" />
-    <entry file="file://$PROJECT_DIR$/arithmeticListener.py" />
-    <entry file="file://$PROJECT_DIR$/arithmetic.g4" />
-    <entry file="file://$PROJECT_DIR$/arithmeticVisitor.py" />
-    <entry file="file://$PROJECT_DIR$/printTree.py" />
-    <entry file="file://$PROJECT_DIR$/arithmeticLexer.py" />
-    <entry file="file://$PROJECT_DIR$/pudim.txt" />
-    <entry file="file://$PROJECT_DIR$/arithmeticLexer.tokens" />
-    <entry file="file://$PROJECT_DIR$/arithmetic.tokens" />
     <entry file="file://$PROJECT_DIR$/semE.cm" />
     <entry file="file://$PROJECT_DIR$/arithmetic.g4" />
     <entry file="file://$PROJECT_DIR$/arithmeticListener.py" />
     <entry file="file://$PROJECT_DIR$/main.py" />
-    <entry file="file://$PROJECT_DIR$/testes/pudim.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="14" lean-forward="false" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cminusListener.py" />
     <entry file="file://$PROJECT_DIR$/cminusParser.py" />
     <entry file="file://$PROJECT_DIR$/project/gen/cminusLexer.tokens">
@@ -545,13 +578,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/project/gen/cminusVisitor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2250">
-          <caret line="125" column="0" lean-forward="false" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///media/everton/OS/Users/EvertonCoelho/Downloads/PyCmComp/PyCmComp/cminus_abstract_st.py" />
     <entry file="file:///media/everton/OS/Users/EvertonCoelho/Downloads/PyCmComp/PyCmComp/__main__.py" />
     <entry file="file:///media/everton/OS/Users/EvertonCoelho/Downloads/PyCmComp/PyCmComp/abstract_printer.py" />
@@ -568,13 +594,6 @@
     <entry file="file://$USER_HOME$/.cache/.fr-bwiyxq/Compilador2/compilador/cminus_symbol.py" />
     <entry file="file://$USER_HOME$/.cache/.fr-TIYRJQ/Compilador2/compilador/cminus_ast.py" />
     <entry file="file://$USER_HOME$/.cache/.fr-tJyMXG/Compilador2/compilador/printer_ast.py" />
-    <entry file="file://$PROJECT_DIR$/testes/gdc_sem_erros.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-149">
-          <caret line="10" column="1" lean-forward="false" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/testes/gdc_lexico1.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-319">
@@ -635,58 +654,123 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="10" column="27" lean-forward="false" selection-start-line="10" selection-start-column="27" selection-end-line="10" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/__main__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-          <folding>
-            <element signature="e#1#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/createAST.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6539">
-          <caret line="379" column="76" lean-forward="true" selection-start-line="379" selection-start-column="76" selection-end-line="379" selection-end-column="76" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cminus.g4">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1008">
-          <caret line="83" column="23" lean-forward="true" selection-start-line="83" selection-start-column="23" selection-end-line="83" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/printAst.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="22" lean-forward="true" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/testes/teste2.cminus">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
+        <state relative-caret-position="612">
           <caret line="34" column="9" lean-forward="false" selection-start-line="34" selection-start-column="9" selection-end-line="34" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/gen/cminusVisitor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="412">
+          <caret line="125" column="0" lean-forward="false" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Downloads/__main__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="64" lean-forward="true" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.cache/.fr-Agphs7/PyCmComp/PyCmComp/cminus_semantic.py" />
+    <entry file="file://$PROJECT_DIR$/testes/gdc_sem_erros.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="6" column="1" lean-forward="false" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testes/sort.txt" />
+    <entry file="file://$USER_HOME$/.cache/.fr-qk8Zyn/PyCmComp/PyCmComp/cminus_intermediate.py" />
+    <entry file="file://$USER_HOME$/.cache/.fr-gsivEH/PyCmComp/PyCmComp/__main__.py" />
+    <entry file="file://$PROJECT_DIR$/project/printAst.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4374">
+          <caret line="243" column="0" lean-forward="true" selection-start-line="243" selection-start-column="0" selection-end-line="243" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/createAST.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="520">
+          <caret line="116" column="8" lean-forward="false" selection-start-line="116" selection-start-column="8" selection-end-line="116" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testes/sort.cminus">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/intermedCode.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="244" column="47" lean-forward="false" selection-start-line="244" selection-start-column="44" selection-end-line="244" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testes/teste.cminus">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="17" column="10" lean-forward="false" selection-start-line="17" selection-start-column="10" selection-end-line="17" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/intermediate_to_assembly.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-956">
+          <caret line="151" column="47" lean-forward="false" selection-start-line="151" selection-start-column="47" selection-end-line="151" selection-end-column="47" />
+          <folding>
+            <element signature="e#1#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cminus.g4">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="38" column="0" lean-forward="true" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testes/pudim.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="16" column="10" lean-forward="false" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/project/semanticAnalysis.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+        <state relative-caret-position="234">
+          <caret line="70" column="123" lean-forward="false" selection-start-line="70" selection-start-column="123" selection-end-line="70" selection-end-column="123" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/__main__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="520">
+          <caret line="66" column="21" lean-forward="false" selection-start-line="66" selection-start-column="21" selection-end-line="66" selection-end-column="21" />
+          <folding>
+            <element signature="e#1#11#0" expanded="true" />
           </folding>
         </state>
       </provider>

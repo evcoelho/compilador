@@ -19,6 +19,7 @@ def main(argv):
     parser.add_argument('--ast', action='store_true')
     parser.add_argument('--symbol', action='store_true')
     parser.add_argument('--intermediate', action='store_true')
+    parser.add_argument('--asbly', action='store_true')
 
     args = parser.parse_args()
 
@@ -61,7 +62,14 @@ def main(argv):
                 print(*i, sep=', ', end='')
                 print(') ')
                 cont += 1
-            assembly = IntermediateToAssembly(semantic,inter)
+            asm = IntermediateToAssembly(semantic,inter)
+        if args.asbly:
+            print('\n')
+            for line in asm.assembly:
+                if len(line) == 1:
+                    print(*line)
+                else:
+                    print('    ', *line)
 
 
 
