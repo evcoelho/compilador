@@ -11,12 +11,7 @@ int gcd (int u, int v)
 
 	/* u-u/v*v == u mod v */
 }
-
-
-int alfa(int a, int b, int c, int d, int e){
-    int f;
-    int g;
-    int h;
+int dum(void){
 
 }
 

@@ -1,0 +1,104 @@
+      loadi $r0 0
+     loadi $stp 0
+     loadi $ra 0
+     jmp main
+gcd:
+     pop $r1 $stp
+     loadi $rl 4
+     store $r1 $rl
+     pop $r1 $stp
+     loadi $rl 5
+     store $r1 $rl
+     loadi $rl 5
+     load $r1 $rl
+     loadi $r2 0
+     eq $r3 $r1 $r2
+     je $r0 $r3 L1
+     loadi $r1 4
+     load $rt $r1
+     jmp $ra
+     jmp L2
+L1.
+     loadi $rl 4
+     load $r1 $rl
+     loadi $rl 5
+     load $r2 $rl
+     div $r3 $r1 $r2
+     loadi $rl 5
+     load $r1 $rl
+     mult $r2 $r3 $r1
+     loadi $rl 4
+     load $r1 $rl
+     sub $r3 $r1 $r2
+     push $ra $stp
+     addi $stp $stp 1
+     loadi $rl 4
+     load $r1 $rl
+     push $r1 $spt
+     addi $stp $stp 1
+     loadi $rl 5
+     load $r1 $rl
+     push $r1 $spt
+     addi $stp $stp 1
+     push $r3 $stp
+     addi $stp $stp 1
+     loadi $rl 5
+     load $r1 $rl
+     push $r1 $stp
+     addi $stp $stp 1
+     jal gcd
+     subi $stp $stp 1
+     pop $r1 $stp
+     loadi $rl 5
+     store $r1 $rl
+     subi $stp $stp 1
+     pop $r1 $stp
+     loadi $rl 4
+     store $r1 $rl
+     subi $stp $stp 1
+     pop $ra $stp
+     move $r1 $rt
+     move $rt $r1
+     jmp $ra
+L2.
+dum:
+main:
+     in $rt
+     move $r1 $rt
+     loadi $r2 6
+     store $r1 $r2
+     in $rt
+     move $r1 $rt
+     loadi $r2 7
+     store $r1 $r2
+     push $ra $stp
+     addi $stp $stp 1
+     loadi $rl 6
+     load $r1 $rl
+     push $r1 $spt
+     addi $stp $stp 1
+     loadi $rl 7
+     load $r1 $rl
+     push $r1 $spt
+     addi $stp $stp 1
+     loadi $rl 7
+     load $r1 $rl
+     push $r1 $stp
+     addi $stp $stp 1
+     loadi $rl 6
+     load $r1 $rl
+     push $r1 $stp
+     addi $stp $stp 1
+     jal gcd
+     subi $stp $stp 1
+     pop $r1 $stp
+     loadi $rl 7
+     store $r1 $rl
+     subi $stp $stp 1
+     pop $r1 $stp
+     loadi $rl 6
+     store $r1 $rl
+     subi $stp $stp 1
+     pop $ra $stp
+     move $r1 $rt
+     out $r1
