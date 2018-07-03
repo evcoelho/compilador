@@ -1,4 +1,4 @@
-      loadi $r0 0
+     loadi $r0 0
      loadi $stp 0
      loadi $ra 0
      jmp main

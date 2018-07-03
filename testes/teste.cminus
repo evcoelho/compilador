@@ -1,34 +1,17 @@
-/* Um programa para calcular o mdc
-   segundo o algoritmo de Euclides. */
 
-int a[3];
+int global;
+int a;
 
+int oh(int vet[]){
+    vet[3] = vet[(a+vet[a+1])*4];
 
-int gcd (int u[], int v)
-{
-
-	/* u-u/v*v == u mod v */
 }
 
 
-int c;
+int main(void){
+    int a[10];
+    int b[15];
+    a[11] = a;
+    oh(b);
 
-void main(void)
-{	int x; int y;
-    int b;
-    x=x+10;
-    y = x + y;
-    x = 12 + 13;
-    y = 15 + x;
-    x = y;
-    while(y<10){
-        b=5+6;
-    }
-
-    while(x<9){
-        b=7+8;
-    }
-
-	x = input(); y = input();
-	output(gcd(a,y));
 }

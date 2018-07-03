@@ -10,6 +10,7 @@ from project.printAst import printAst
 from project.semanticAnalysis import SemanticAnalysisTableG
 from project.intermedCode import IntermedCode
 from project.intermediate_to_assembly import IntermediateToAssembly
+from project.asm_to_bin import AsmToBin
 
 
 def main(argv):
@@ -20,6 +21,7 @@ def main(argv):
     parser.add_argument('--symbol', action='store_true')
     parser.add_argument('--intermediate', action='store_true')
     parser.add_argument('--asbly', action='store_true')
+    parser.add_argument('--bin', action='store_true')
 
     args = parser.parse_args()
 
@@ -49,9 +51,9 @@ def main(argv):
             print(error)
 
     else:
+        inter = IntermedCode(ast)
         if args.intermediate:
             cont = 0
-            inter = IntermedCode(ast)
             print(' ')
             print(args.file,': ')
             with open(args.file, 'r') as file:
@@ -62,15 +64,18 @@ def main(argv):
                 print(*i, sep=', ', end='')
                 print(') ')
                 cont += 1
-            asm = IntermediateToAssembly(semantic,inter)
+        asm = IntermediateToAssembly(semantic,inter)
         if args.asbly:
             print('\n')
+            i = 0
             for line in asm.assembly:
                 if len(line) == 1:
                     print(*line)
                 else:
-                    print('    ', *line)
-
+                    print('    ', f'{i}:', *line)
+                    i += 1
+        # bin = AsmToBin(asm)
+        # if args.bin:
 
 
 if __name__ == '__main__':
