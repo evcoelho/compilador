@@ -24,7 +24,7 @@ class IntermediateToAssembly:
         self.assembly.append(['loadi', '$r0', '0'])
         self.assembly.append(['loadi', '$stp', '0'])
         self.assembly.append(['loadi', '$ra', '0'])
-        self.assembly.append(['jmp', 'main'])
+        self.assembly.append(['jmpi', 'main'])
         for inter in self.intermediate.intermediario:
 
             if inter[0] == 'function':
@@ -82,14 +82,15 @@ class IntermediateToAssembly:
                 RS = self.ret_reg_free()
                 if type1 == 'var':
                     pos_men = self.get_mem_pos(inter[1])
-                    self.assembly.append(['load', f'$r{RS}', pos_men])
+                    self.assembly.append(['loadi', f'$rl', pos_men])
+                    self.assembly.append(['load', f'$r{RS}', '$rl'])
                 elif type1 == 'imt':
                     self.assembly.append(['loadi', f'$r{RS}', inter[1]])
                 elif type1 == 'temp':
                     if inter[1] in self.temp_to_register:
                         self.free_reg(RS)
                         RS = self.temp_to_register[inter[1]]
-                self.assembly.append(['je', f'$r0', f'$r{RS}', inter[2]])
+                self.assembly.append(['jei', f'$r0', f'$r{RS}', inter[2]])
                 self.free_reg(RS)
                 self.temp_to_register[inter[1]] = -1
 
@@ -231,7 +232,7 @@ class IntermediateToAssembly:
                     self.temp_to_register[arg[1]] = -1
 
             if inter[0] == 'go_to':
-                self.assembly.append(['jmp', f'{inter[1]}'])
+                self.assembly.append(['jmpi', f'{inter[1]}'])
 
             if inter[0] == 'assign_end_vet': # passagem de vetor como parametro tratado
                 if self.is_a_parameter(inter[1]):

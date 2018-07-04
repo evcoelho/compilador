@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7dc8e40c-6eeb-4584-84b0-f5d1525fac31" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/project/__main__.py" afterPath="$PROJECT_DIR$/project/__main__.py" />
-      <change beforePath="$PROJECT_DIR$/project/asm.txt" afterPath="" />
       <change beforePath="$PROJECT_DIR$/project/asm_to_bin.py" afterPath="$PROJECT_DIR$/project/asm_to_bin.py" />
+      <change beforePath="$PROJECT_DIR$/project/intermediate_to_assembly.py" afterPath="$PROJECT_DIR$/project/intermediate_to_assembly.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -12,26 +11,6 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="DockManager">
-    <window id="2">
-      <content type="file-editors">
-        <state>
-          <leaf>
-            <file leaf-file-name="asm_to_bin.py" pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/project/asm_to_bin.py">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="406">
-                    <caret line="39" column="77" lean-forward="false" selection-start-line="39" selection-start-column="77" selection-end-line="39" selection-end-column="77" />
-                    <folding />
-                  </state>
-                </provider>
-              </entry>
-            </file>
-          </leaf>
-        </state>
-      </content>
-    </window>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
@@ -48,8 +27,8 @@
       <file leaf-file-name="intermedCode.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/project/intermedCode.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1048">
-              <caret line="162" column="36" lean-forward="false" selection-start-line="162" selection-start-column="26" selection-end-line="162" selection-end-column="36" />
+            <state relative-caret-position="174">
+              <caret line="177" column="42" lean-forward="false" selection-start-line="177" selection-start-column="38" selection-end-line="177" selection-end-column="42" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
               </folding>
@@ -57,12 +36,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="intermediate_to_assembly.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="intermediate_to_assembly.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/project/intermediate_to_assembly.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
-              <caret line="1" column="19" lean-forward="false" selection-start-line="1" selection-start-column="17" selection-end-line="1" selection-end-column="19" />
-              <folding />
+            <state relative-caret-position="390">
+              <caret line="197" column="42" lean-forward="false" selection-start-line="197" selection-start-column="42" selection-end-line="197" selection-end-column="42" />
+              <folding>
+                <element signature="e#1#33#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -119,6 +100,16 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="asm_to_bin.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/project/asm_to_bin.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="234">
+              <caret line="205" column="34" lean-forward="true" selection-start-line="205" selection-start-column="34" selection-end-line="205" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -130,10 +121,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>count_pos_mem</find>
-      <find>TipoEsp</find>
-      <find>fun_declaracao</find>
-      <find>num</find>
       <find>ASSIGN</find>
       <find>expressao</find>
       <find>var</find>
@@ -146,7 +133,6 @@
       <find>param_lista</find>
       <find>param</find>
       <find>store</find>
-      <find>move</find>
       <find>stack_args</find>
       <find>stack_register</find>
       <find>range</find>
@@ -160,6 +146,11 @@
       <find>tokens</find>
       <find>assign_vet</find>
       <find>rt</find>
+      <find>move</find>
+      <find>equa</find>
+      <find>jmp</find>
+      <find>je</find>
+      <find>jal</find>
     </findStrings>
     <replaceStrings>
       <replace>ctx</replace>
@@ -216,14 +207,13 @@
         <option value="$PROJECT_DIR$/testes/teste.cminus" />
         <option value="$USER_HOME$/Downloads/Binary.py" />
         <option value="$PROJECT_DIR$/project/semanticAnalysis.py" />
-        <option value="$PROJECT_DIR$/project/intermediate_to_assembly.py" />
         <option value="$PROJECT_DIR$/project/__main__.py" />
+        <option value="$PROJECT_DIR$/project/intermediate_to_assembly.py" />
         <option value="$PROJECT_DIR$/project/asm_to_bin.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1024" />
     <option name="y" value="27" />
     <option name="width" value="1366" />
     <option name="height" value="741" />
@@ -438,10 +428,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1024" y="27" width="1366" height="741" extended-state="6" />
+    <frame x="0" y="27" width="1366" height="741" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19136262" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19136262" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Tool Output" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.47697368" sideWeight="0.51005214" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4161184" sideWeight="0.47580045" order="12" side_tool="true" content_ui="tabs" />
@@ -764,8 +754,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/project/intermedCode.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1048">
-          <caret line="162" column="36" lean-forward="false" selection-start-line="162" selection-start-column="26" selection-end-line="162" selection-end-column="36" />
+        <state relative-caret-position="174">
+          <caret line="177" column="42" lean-forward="false" selection-start-line="177" selection-start-column="38" selection-end-line="177" selection-end-column="42" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
           </folding>
@@ -774,16 +764,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/project/intermediate_to_assembly.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="1" column="19" lean-forward="false" selection-start-line="1" selection-start-column="17" selection-end-line="1" selection-end-column="19" />
-          <folding />
+        <state relative-caret-position="390">
+          <caret line="197" column="42" lean-forward="false" selection-start-line="197" selection-start-column="42" selection-end-line="197" selection-end-column="42" />
+          <folding>
+            <element signature="e#1#33#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/project/asm_to_bin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="39" column="77" lean-forward="false" selection-start-line="39" selection-start-column="77" selection-end-line="39" selection-end-column="77" />
+        <state relative-caret-position="234">
+          <caret line="205" column="34" lean-forward="true" selection-start-line="205" selection-start-column="34" selection-end-line="205" selection-end-column="34" />
           <folding />
         </state>
       </provider>
