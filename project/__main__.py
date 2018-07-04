@@ -74,8 +74,11 @@ def main(argv):
                 else:
                     print('    ', f'{i}:', *line)
                     i += 1
-        # bin = AsmToBin(asm)
-        # if args.bin:
+        bina = AsmToBin(asm)
+        if args.bin:
+            for line in bina.bin:
+                print(line)
+
 
 
 if __name__ == '__main__':
