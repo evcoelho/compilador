@@ -23,13 +23,13 @@ class AsmToBin:
             aux = line
             for i in range(0, len(line)):
                 if line[i] == '$rt':
-                    line[i] = '$r29'
+                    line[i] = '$r28'
                 elif line[i] == '$stp':
-                    line[i] = '$r30'
+                    line[i] = '$r29'
                 elif line[i] == '$rl':
-                    line[i] = '$r31'
+                    line[i] = '$r30'
                 elif line[i] == '$ra':
-                    line[i] = '$r32'
+                    line[i] = '$r31'
             if line[0] == 'add':
                 self.bin.append(
                     code + '{0:06b}_{1:05b}_{2:05b}_{3:05b}_{4:011b}'.format(1,
@@ -215,5 +215,19 @@ class AsmToBin:
                                                                      int(line[2][2:]),
                                                                      int(self.hash_labels[line[3]])
                                                                      ) + '; //' + str(aux))
+            elif line[0] == 'push':
+                self.bin.append(
+                    code + '{0:06b}_{1:05b}_{2:05b}_{3:016b}'.format(35,
+                                                                     int(line[1][2:]),
+                                                                     int(line[2][2:]),
+                                                                     0) + '; //' + str(aux))
+            elif line[0] == 'pop':
+                self.bin.append(
+                    code + '{0:06b}_{1:05b}_{2:05b}_{3:016b}'.format(36,
+                                                                     int(line[1][2:]),
+                                                                     int(line[2][2:]),
+                                                                     0) + '; //' + str(aux))
             if len(line) > 1:
                 line_n += 1
+
+        self.bin.append(code + '{0:06b}_{1:026b}'.format(25, 0) + '; // halt')

@@ -68,10 +68,10 @@ class SemanticAnalysisTableG(createAST.AstVisitor):
 
         if no.num:
             if self._scope == '':
-                self.table[f'global.{name}'] = Symbol(no.id_, 'global', no.line, f'var[{no.num}]', no.tipo.tipoE, [self.count_pos_mem, self.count_pos_mem+int(no.num)-1])
+                self.table[f'global.{name}'] = Symbol(no.id_, 'global', no.line, f'var[]', no.tipo.tipoE, self.count_pos_mem)
                 self.count_pos_mem += int(no.num)
             else:
-                self.table[name] = Symbol(no.id_, self._scope, no.line, f'var[{no.num}]', no.tipo.tipoE, self.count_pos_mem)
+                self.table[name] = Symbol(no.id_, self._scope, no.line, f'var[]', no.tipo.tipoE, self.count_pos_mem)
                 self.count_pos_mem += int(no.num)
         else:
             if self._scope == '':

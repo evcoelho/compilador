@@ -1,17 +1,17 @@
 
 int global;
 int a;
-
+/*
 int oh(int vet[]){
     vet[3] = vet[(a+vet[a+1])*4];
 
 }
-
+*/
 
 int main(void){
     int a[10];
     int b[15];
     a[11] = a;
-    oh(b);
+
 
 }

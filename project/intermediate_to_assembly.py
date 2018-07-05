@@ -180,8 +180,15 @@ class IntermediateToAssembly:
 
                     if type1 == 'var':
                         pos_men = self.get_mem_pos(arg[1])
-                        self.assembly.append(['loadi', f'$rl', pos_men])
-                        self.assembly.append(['load', f'$r{RS}', f'$rl'])
+                        if self.is_a_vet(arg[1]):
+                            if self.is_a_parameter(arg[1]):
+                                self.assembly.append(['loadi', f'$rl', pos_men])
+                                self.assembly.append(['load', f'$r{RS}', f'$rl'])
+                            else:
+                                self.assembly.append(['loadi', f'$r{RS}', pos_men])
+                        else:
+                            self.assembly.append(['loadi', f'$rl', pos_men])
+                            self.assembly.append(['load', f'$r{RS}', f'$rl'])
                     elif type1 == 'imt':
                         self.assembly.append(['loadi', f'$r{RS}', arg[1]])
                     elif type1 == 'temp':
@@ -374,6 +381,17 @@ class IntermediateToAssembly:
                     self.temp_to_register[inter[2]] = -1
                     # self.assembly.append(['----------------------------'])
 
+    def is_a_vet(self, vet):
+        name = f'{self.scope}.{vet}'
+        if name in self.semantic_table:
+            if self.semantic_table[name].id_type == 'var[]':
+                return True
+        name = f'global.{vet}'
+        if name in self.semantic_table:
+            if self.semantic_table[name].id_type == 'var[]':
+                return True
+        return False
+
     def is_a_parameter(self, var):
         if self.scope in self.semantic_table:
             parameters = self.semantic_table[self.scope].args
@@ -400,7 +418,7 @@ class IntermediateToAssembly:
                 self.stack_vars.append(self.semantic_table[key].name)
                 self.assembly.append(['loadi', f'$rl', pos_men])
                 self.assembly.append(['load', f'$r{RS}', f'$rl'])
-                self.assembly.append(['push', f'$r{RS}', f'$spt'])
+                self.assembly.append(['push', f'$r{RS}', f'$stp'])
                 self.assembly.append(['addi', f'$stp', '$stp', '1'])
                 self.free_reg(RS)
         # self.assembly.append(['............................................'])

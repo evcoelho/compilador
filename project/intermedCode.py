@@ -119,6 +119,7 @@ class IntermedCode(createAST.AstVisitor):
         label_end = self.label
         lista_aux = ['jump_if_false', cond, f'L{label_end}', '']
         self.intermediario.append(lista_aux)
+        self.intermediario.append(lista_aux)
 
         self.visit(no.corpo)
         lista_aux = ['go_to', f'L{label_start}', '', '']
