@@ -230,4 +230,4 @@ class AsmToBin:
             if len(line) > 1:
                 line_n += 1
 
-        self.bin.append(code + '{0:06b}_{1:026b}'.format(25, 0) + '; // halt')
+        self.bin.append('mem_ram[' + str(line_n) + "] = 32'b" + '{0:06b}_{1:026b}'.format(25, 0) + '; // halt')

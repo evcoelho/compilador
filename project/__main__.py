@@ -76,6 +76,7 @@ def main(argv):
                     i += 1
         bina = AsmToBin(asm)
         if args.bin:
+            print('\n')
             for line in bina.bin:
                 print(line)
 

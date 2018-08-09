@@ -41,6 +41,9 @@ class IntermedCode(createAST.AstVisitor):
         self.intermediario.append(lista_aux)
         self.visit(no.parametros)
         self.visit(no.declComp)
+        # add um return
+        if no.id_ != 'main':
+            self.intermediario.append(['return', '0', '', ''])
 
     def visit_Parametros(self, no: createAST.Parametros):
         if no.listaParam:
@@ -117,8 +120,8 @@ class IntermedCode(createAST.AstVisitor):
         cond = self.visit(no.condicao)
         self.label += 1
         label_end = self.label
+
         lista_aux = ['jump_if_false', cond, f'L{label_end}', '']
-        self.intermediario.append(lista_aux)
         self.intermediario.append(lista_aux)
 
         self.visit(no.corpo)
