@@ -1,73 +1,65 @@
-/***************************************************/
+#Cminus Compiler
 
-Requisitos:
+## How to run
 
-	-Antlr4.7
+1. Install pipenv
 
-/***************************************************/
+        $ pip install pipenv
 
-Instação do Antlr4 (Ubuntu 16.04): 
+2. Install Antlr 4.7 on LINUX
 
-	Antlr is a parser generator written in Java.
+        $ cd /usr/local/lib
 
-	Execute these commands to download atlr .jar file in /usr/local/lib directory
+        $ wget https://www.antlr.org/download/antlr-4.7.1-complete.jar
 
-	$ cd /usr/local/lib
-	$ curl -O http://www.antlr.org/download/antlr-4.7-complete.jar
+        $ export CLASSPATH=".:/usr/local/lib/antlr-4.7.1-complete.jar:$CLASSPATH"
 
+        $ alias antlr4='java -jar /usr/local/lib/antlr-4.7.1-complete.jar'
 
-	add antlr4 to your class path.
+        $ alias grun='java org.antlr.v4.gui.TestRig'
 
-	$ export CLASSPATH=".:/usr/local/lib/antlr-4.7-complete.jar:$CLASSPATH"
+3. cd into the repository
 
-	create alias
+4. Install the dependencies
 
-	$ alias antlr4='java -Xmx500M -cp "/usr/local/lib/antlr-4.7-complete.jar:$CLASSPATH" org.antlr.v4.Tool'
-	$ alias grun='java org.antlr.v4.runtime.misc.TestRig'
+        $ sudo pipenv install //sudo pipenv --python python3.6 install
+	$ pipenv shell
 
-	Test installation
+5. Install antlr4
 
-	$ java org.antlr.v4.Tool
+        $ pip install antlr4-python3-runtime
+	/* or pip version 10.x
+		sudo apt install python3-pip --reinstall
+		python3 -m pip install antlr4-python3-runtime
+	*/	
+6. Install tabulate
 
-	"ANTLR Parser Generator  Version 4.5
-	 -o ___              specify output directory where all output is generated
-	 -lib ___            specify location of grammars, tokens files
-	 -atn                generate rule augmented transition network diagrams
-	...........
-	..........."
+        $ pip install tabulate
+	/* or pip version 10.x
+		python3 -m pip install tabulate
+	*/
+7. To generate the parse
+ 
+        $ antlr4 -Dlanguage=Python3 -visitor -o compilador/gen cminus.g4
 
-	The above 3 commands (one export and two alias commands) needs to be run every time you start a new terminal. To solve this problem put the three commands in your .bashrc file like shown below.
+8. To run the compiler
 
-	Open the.bashrc file in any text editor 
-	gedit ~/.bashrc
+	$ python3 -m project --lexer --ast --symbol --intermediate  --asbly --bin --file testes/pudim.txt
 
-	and add the three commands at the bottom of the file.
+## Command Line Options
 
-	Note: bashrc is a script file that automatically executes whenever a new terminal is opened.
+The compiler runs as a Python module, so you have to run python -m compiler to actually execute the compiler.
 
-	Por fim, instale a extensao do antlr4 para o python.
+To make the compiler output the tokens, add the option --lexer.
 
-	pip install antlr4-python3-runtime
+To make the compiler output the AST, add the option --ast.
 
-/***************************************************/
+To make the compiler output the symbol table, add the option --symbol.
 
-Procedimento:
+To make the compiler output intermediate code, add the option --middle.
 
-	Para gerar o analisador léxico e o parser através da gramática .g4 :
+To make the compiler output assembly code, add the option --asm.
 
-	$ antlr4 -Dlanguage=Python3 cminus.g4
-    
-    Desta forma aparecerá os arquivos gerados:
-    -cminus.tokens
-    -cminusLexer.py
-    -cminusLexer.tokens
-    -cminusListener.py
-    -cminusParser.py
+To make the compiler output machine code, add the option --bin.
 
-    Esses arquivos estão presentes na pasta 'arquivos gerados'. Caso precise para os testes, mover todos arquivos citados acima para a pasta raiz.
-
-	Para executar o analisado em cima de um arquivo teste:
-
-	$ python tree.py gdc_sem_erros.txt
-
-    Utilizar códigos testes da própria pasta, pois foram retirados caracteres UniCode, pois apresentavam erros na compilacao.
+To specify which file it should compile, add the option --file <your file here>.
