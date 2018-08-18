@@ -23,28 +23,32 @@
 4. Install the dependencies
 
         $ sudo pipenv install //sudo pipenv --python python3.6 install
-	$ pipenv shell
+		$ pipenv shell
 
 5. Install antlr4
 
         $ pip install antlr4-python3-runtime
-	/* or pip version 10.x
-		sudo apt install python3-pip --reinstall
-		python3 -m pip install antlr4-python3-runtime
-	*/	
+
+	or pip version 10.x
+
+		$ sudo apt install python3-pip --reinstall
+		$ python3 -m pip install antlr4-python3-runtime
+		
 6. Install tabulate
 
         $ pip install tabulate
-	/* or pip version 10.x
-		python3 -m pip install tabulate
-	*/
+
+	 or pip version 10.x
+
+		$ python3 -m pip install tabulate
+	
 7. To generate the parse
  
         $ antlr4 -Dlanguage=Python3 -visitor -o compilador/gen cminus.g4
 
 8. To run the compiler
 
-	$ python3 -m project --lexer --ast --symbol --intermediate  --asbly --bin --file testes/pudim.txt
+		$ python3 -m project --lexer --ast --symbol --intermediate  --asbly --bin --file testes/pudim.txt
 
 ## Command Line Options
 

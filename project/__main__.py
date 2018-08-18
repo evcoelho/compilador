@@ -77,9 +77,11 @@ def main(argv):
         bina = AsmToBin(asm)
         if args.bin:
             print('\n')
+            file_bin = open('bin.txt','w')
             for line in bina.bin:
                 print(line)
-
+                file_bin.write(line+'\n')
+            file_bin.close()
 
 
 if __name__ == '__main__':

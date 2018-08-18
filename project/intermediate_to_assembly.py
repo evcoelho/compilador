@@ -541,7 +541,7 @@ class IntermediateToAssembly:
             self.status_reg.append([cont, 1])
             cont += 1
 
-    def search_type(self,string):
+    def search_type(self, string):
         x=''
         if re.match('t[0-9]', string):
             x = 'temp'
