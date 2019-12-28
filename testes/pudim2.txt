@@ -1,0 +1,11 @@
+
+
+void main(void)
+{	int vet[2]; int y;
+	int r;
+	vet[0] = input(); vet[1] = scanf();
+	r = vet[0]-vet[1];
+	output(vet[0]);
+	writeosmem(1,2,3);
+	flagrd();
+}

@@ -11,7 +11,11 @@ class IntermedCode(createAST.AstVisitor):
         self.line = -1
         self.temp = 0
         self.label = 0
-        self.sys_call = ['input', 'output']
+        self.sys_call = ['input', 'output', 'flagrd',
+                         'flagrsrt', 'loadhd', 'storehd',
+                         'movehdmem', 'writeosmem', 'setprogos',
+                         'savepcprog', 'setpcprog',
+                         'printf', 'scanf', 'setInitialStack', 'setInitialMem', 'regtomem', 'memtoreg']
         self.visit(ast_)
 
 
@@ -251,7 +255,19 @@ class IntermedCode(createAST.AstVisitor):
             lista_aux.append('')
             self.intermediario.append(lista_aux)
             self.temp += 1
-            if no.id_ != 'output':
+            if no.id_ != 'output' \
+                    and no.id_ != 'flagrd' \
+                    and no.id_ != 'flagrsrt' \
+                    and no.id_ != 'movehdmem'\
+                    and no.id_ != 'writeosmem' \
+                    and no.id_ != 'setprogos' \
+                    and no.id_ != 'savepcprog' \
+                    and no.id_ != 'setpcprog' \
+                    and no.id_ != 'printf' \
+                    and no.id_ != 'setInitialStack' \
+                    and no.id_ != 'setInitialMem'\
+                    and no.id_ != 'regtomem'\
+                    and no.id_ != 'memtoreg':
                 lista_aux = ['assign_ret', f't{self.temp}', 'RT', '']
                 self.intermediario.append(lista_aux)
                 return f't{self.temp}'
@@ -262,7 +278,8 @@ class IntermedCode(createAST.AstVisitor):
                 call = 'function_call'
             self.temp += 1
             lista_aux = [call, f'{no.id_}', '', '']
-            self.intermediario.append(lista_aux)
-            lista_aux = ['assign_ret', f't{self.temp}', 'RT', '']
+            if no.id_ == 'input' or no.id_ == 'scanf':
+                self.intermediario.append(lista_aux)
+                lista_aux = ['assign_ret', f't{self.temp}', 'RT', '']
             self.intermediario.append(lista_aux)
             return f't{self.temp}'

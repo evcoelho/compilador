@@ -219,6 +219,7 @@ class IntermediateToAssembly:
             if inter[0] == 'sys_call':
                 if inter[1] == 'input':
                     self.assembly.append(['in', f'$rt'])
+
                 if inter[1] == 'output':
                     arg = self.stack_args.pop()
                     type1 = self.search_type(arg[1])
@@ -237,6 +238,267 @@ class IntermediateToAssembly:
                     self.assembly.append(['out', f'$r{RS}'])
                     self.free_reg(RS)
                     self.temp_to_register[arg[1]] = -1
+
+                if inter[1] == 'flagrd':
+                    self.assembly.append(['flagrd', ' '])
+
+                if inter[1] == 'flagrsrt':
+                    self.assembly.append(['flagrsrt', ' '])
+
+                if inter[1] == 'movehdmem':
+
+                    arg3 = self.stack_args.pop()
+                    type1 = self.search_type(arg3[1])
+                    RT = self.ret_reg_free()
+
+                    if type1 == 'var':
+                        pos_men = self.get_mem_pos(arg3[1])
+                        self.assembly.append(['loadi', f'$rl', pos_men])
+                        self.assembly.append(['load', f'$r{RT}', f'$rl'])
+                    elif type1 == 'imt':
+                        self.assembly.append(['loadi', f'$r{RT}', arg3[1]])
+                    elif type1 == 'temp':
+                        if arg3[1] in self.temp_to_register:
+                            self.free_reg(RT)
+                            RT = self.temp_to_register[arg3[1]]
+
+                    arg2 = self.stack_args.pop()
+                    type1 = self.search_type(arg2[1])
+                    RS = self.ret_reg_free()
+
+                    if type1 == 'var':
+                        pos_men = self.get_mem_pos(arg2[1])
+                        self.assembly.append(['loadi', f'$rl', pos_men])
+                        self.assembly.append(['load', f'$r{RS}', f'$rl'])
+                    elif type1 == 'imt':
+                        self.assembly.append(['loadi', f'$r{RS}', arg2[1]])
+                    elif type1 == 'temp':
+                        if arg2[1] in self.temp_to_register:
+                            self.free_reg(RS)
+                            RS = self.temp_to_register[arg2[1]]
+
+                    arg1 = self.stack_args.pop()
+                    type1 = self.search_type(arg1[1])
+                    RD = self.ret_reg_free()
+
+                    if type1 == 'var':
+                        pos_men = self.get_mem_pos(arg1[1])
+                        self.assembly.append(['loadi', f'$rl', pos_men])
+                        self.assembly.append(['load', f'$r{RD}', f'$rl'])
+                    elif type1 == 'imt':
+                        self.assembly.append(['loadi', f'$r{RD}', arg1[1]])
+                    elif type1 == 'temp':
+                        if arg1[1] in self.temp_to_register:
+                            self.free_reg(RD)
+                            RD = self.temp_to_register[arg1[1]]
+
+                    self.assembly.append(['movehdmem', f'$r{RD}', f'$r{RS}', f'$r{RT}'])
+                    self.free_reg(RD)
+                    self.free_reg(RS)
+                    self.free_reg(RT)
+                    self.temp_to_register[arg1[1]] = -1
+                    self.temp_to_register[arg2[1]] = -1
+                    self.temp_to_register[arg3[1]] = -1
+
+                if inter[1] == 'writeosmem':
+                    arg3 = self.stack_args.pop()
+                    type1 = self.search_type(arg3[1])
+                    RT = self.ret_reg_free()
+
+                    if type1 == 'var':
+                        pos_men = self.get_mem_pos(arg3[1])
+                        self.assembly.append(['loadi', f'$rl', pos_men])
+                        self.assembly.append(['load', f'$r{RT}', f'$rl'])
+                    elif type1 == 'imt':
+                        self.assembly.append(['loadi', f'$r{RT}', arg3[1]])
+                    elif type1 == 'temp':
+                        if arg3[1] in self.temp_to_register:
+                            self.free_reg(RT)
+                            RT = self.temp_to_register[arg3[1]]
+
+                    arg2 = self.stack_args.pop()
+                    type1 = self.search_type(arg2[1])
+                    RS = self.ret_reg_free()
+
+                    if type1 == 'var':
+                        pos_men = self.get_mem_pos(arg2[1])
+                        self.assembly.append(['loadi', f'$rl', pos_men])
+                        self.assembly.append(['load', f'$r{RS}', f'$rl'])
+                    elif type1 == 'imt':
+                        self.assembly.append(['loadi', f'$r{RS}', arg2[1]])
+                    elif type1 == 'temp':
+                        if arg2[1] in self.temp_to_register:
+                            self.free_reg(RS)
+                            RS = self.temp_to_register[arg2[1]]
+
+                    arg1 = self.stack_args.pop()
+                    type1 = self.search_type(arg1[1])
+                    RD = self.ret_reg_free()
+
+                    if type1 == 'var':
+                        pos_men = self.get_mem_pos(arg1[1])
+                        self.assembly.append(['loadi', f'$rl', pos_men])
+                        self.assembly.append(['load', f'$r{RD}', f'$rl'])
+                    elif type1 == 'imt':
+                        self.assembly.append(['loadi', f'$r{RD}', arg1[1]])
+                    elif type1 == 'temp':
+                        if arg1[1] in self.temp_to_register:
+                            self.free_reg(RD)
+                            RD = self.temp_to_register[arg1[1]]
+
+                    self.assembly.append(['writeosmem', f'$r{RD}', f'$r{RS}', f'$r{RT}'])
+                    self.free_reg(RD)
+                    self.free_reg(RS)
+                    self.free_reg(RT)
+                    self.temp_to_register[arg1[1]] = -1
+                    self.temp_to_register[arg2[1]] = -1
+                    self.temp_to_register[arg3[1]] = -1
+
+                if inter[1] == 'setprogos':
+                    self.assembly.append(['setprogos', ' '])
+
+                if inter[1] == 'savepcprog':
+                    self.assembly.append(['savepcprog', ' '])
+
+                if inter[1] == 'setpcprog':
+                    self.assembly.append(['setpcprog', '$rpc'])
+
+                if inter[1] == 'printf':
+                    arg = self.stack_args.pop()
+                    type1 = self.search_type(arg[1])
+                    RS = self.ret_reg_free()
+
+                    if type1 == 'var':
+                        pos_men = self.get_mem_pos(arg[1])
+                        self.assembly.append(['loadi', f'$rl', pos_men])
+                        self.assembly.append(['load', f'$r{RS}', f'$rl'])
+                    elif type1 == 'imt':
+                        self.assembly.append(['loadi', f'$r{RS}', arg[1]])
+                    elif type1 == 'temp':
+                        if arg[1] in self.temp_to_register:
+                            self.free_reg(RS)
+                            RS = self.temp_to_register[arg[1]]
+                    self.assembly.append(['move', f'rout', f'$r{RS}'])
+                    self.assembly.append(['loadi', f'$interrupt', '1'])
+                    self.assembly.append(['setprogos', ' '])
+                    self.free_reg(RS)
+                    self.temp_to_register[arg[1]] = -1
+
+                if inter[1] == 'scanf':
+                    self.assembly.append(['loadi', f'$interrupt', '2'])
+                    self.assembly.append(['setprogos', ' '])
+
+                if inter[1] == 'setInicialStack':
+                    arg = self.stack_args.pop()
+                    type1 = self.search_type(arg[1])
+                    RS = self.ret_reg_free()
+
+                    if type1 == 'var':
+                        pos_men = self.get_mem_pos(arg[1])
+                        self.assembly.append(['loadi', f'$rl', pos_men])
+                        self.assembly.append(['load', f'$r{RS}', f'$rl'])
+                    elif type1 == 'imt':
+                        self.assembly.append(['loadi', f'$r{RS}', arg[1]])
+                    elif type1 == 'temp':
+                        if arg[1] in self.temp_to_register:
+                            self.free_reg(RS)
+                            RS = self.temp_to_register[arg[1]]
+                    self.assembly.append(['move', f'$stp', f'$r{RS}'])
+                    self.free_reg(RS)
+                    self.temp_to_register[arg[1]] = -1
+
+                if inter[1] == 'setInicialMem':
+                    arg = self.stack_args.pop()
+                    type1 = self.search_type(arg[1])
+                    RS = self.ret_reg_free()
+
+                    if type1 == 'var':
+                        pos_men = self.get_mem_pos(arg[1])
+                        self.assembly.append(['loadi', f'$rl', pos_men])
+                        self.assembly.append(['load', f'$r{RS}', f'$rl'])
+                    elif type1 == 'imt':
+                        self.assembly.append(['loadi', f'$r{RS}', arg[1]])
+                    elif type1 == 'temp':
+                        if arg[1] in self.temp_to_register:
+                            self.free_reg(RS)
+                            RS = self.temp_to_register[arg[1]]
+                    self.assembly.append(['move', f'$rmem', f'$r{RS}'])
+                    self.free_reg(RS)
+                    self.temp_to_register[arg[1]] = -1
+
+                if inter[1] == 'regtomem':
+                    arg2 = self.stack_args.pop()
+                    type1 = self.search_type(arg2[1])
+                    RS = self.ret_reg_free()
+
+                    if type1 == 'var':
+                        pos_men = self.get_mem_pos(arg2[1])
+                        self.assembly.append(['loadi', f'$rl', pos_men])
+                        self.assembly.append(['load', f'$r{RS}', f'$rl'])
+                    elif type1 == 'imt':
+                        self.assembly.append(['loadi', f'$r{RS}', arg2[1]])
+                    elif type1 == 'temp':
+                        if arg2[1] in self.temp_to_register:
+                            self.free_reg(RS)
+                            RS = self.temp_to_register[arg2[1]]
+
+                    arg1 = self.stack_args.pop()
+                    type1 = self.search_type(arg1[1])
+                    RD = self.ret_reg_free()
+
+                    if type1 == 'var':
+                        pos_men = self.get_mem_pos(arg1[1])
+                        self.assembly.append(['loadi', f'$rl', pos_men])
+                        self.assembly.append(['load', f'$r{RD}', f'$rl'])
+                    elif type1 == 'imt':
+                        self.assembly.append(['loadi', f'$r{RD}', arg1[1]])
+                    elif type1 == 'temp':
+                        if arg1[1] in self.temp_to_register:
+                            self.free_reg(RD)
+                            RD = self.temp_to_register[arg1[1]]
+
+                    self.assembly.append(['store', f'$r{RD}', f'$r{RS}'])
+                    self.free_reg(RD)
+                    self.free_reg(RS)
+                    self.temp_to_register[arg1[1]] = -1
+                    self.temp_to_register[arg2[1]] = -1
+
+                if inter[1] == 'memtoreg':
+                    arg2 = self.stack_args.pop()
+                    type1 = self.search_type(arg2[1])
+                    RS = self.ret_reg_free()
+
+                    if type1 == 'var':
+                        pos_men = self.get_mem_pos(arg2[1])
+                        self.assembly.append(['loadi', f'$rl', pos_men])
+                        self.assembly.append(['load', f'$r{RS}', f'$rl'])
+                    elif type1 == 'imt':
+                        self.assembly.append(['loadi', f'$r{RS}', arg2[1]])
+                    elif type1 == 'temp':
+                        if arg2[1] in self.temp_to_register:
+                            self.free_reg(RS)
+                            RS = self.temp_to_register[arg2[1]]
+
+                    arg1 = self.stack_args.pop()
+                    type1 = self.search_type(arg1[1])
+                    RD = self.ret_reg_free()
+
+                    if type1 == 'var':
+                        pos_men = self.get_mem_pos(arg1[1])
+                        self.assembly.append(['loadi', f'$rl', pos_men])
+                        self.assembly.append(['load', f'$r{RD}', f'$rl'])
+                    elif type1 == 'imt':
+                        self.assembly.append(['loadi', f'$r{RD}', arg1[1]])
+                    elif type1 == 'temp':
+                        if arg1[1] in self.temp_to_register:
+                            self.free_reg(RD)
+                            RD = self.temp_to_register[arg1[1]]
+
+                    self.assembly.append(['load', f'$r{RD}', f'$r{RS}'])
+                    self.free_reg(RD)
+                    self.free_reg(RS)
+                    self.temp_to_register[arg1[1]] = -1
+                    self.temp_to_register[arg2[1]] = -1
 
             if inter[0] == 'go_to':
                 self.assembly.append(['jmpi', f'{inter[1]}'])

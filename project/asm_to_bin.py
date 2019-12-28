@@ -19,7 +19,7 @@ class AsmToBin:
                 i += 1
 
         for line in self.assembly:
-            code = 'mem_ram[' + str(line_n) + "] = 32'b"
+            code = 'mem_ram_os[' + str(line_n) + "] = 32'b"
             aux = line
             for i in range(0, len(line)):
                 if line[i] == '$rt':
@@ -230,4 +230,4 @@ class AsmToBin:
             if len(line) > 1:
                 line_n += 1
 
-        self.bin.append('mem_ram[' + str(line_n) + "] = 32'b" + '{0:06b}_{1:026b}'.format(25, 0) + '; // halt')
+        self.bin.append('mem_ram_os[' + str(line_n) + "] = 32'b" + '{0:06b}_{1:026b}'.format(25, 0) + '; // halt')

@@ -26,7 +26,11 @@ class SemanticAnalysisTableG(createAST.AstVisitor):
         self.errors = []
         self._scope = ''
         self.count_pos_mem = 0
-        self.sys_call = ['input', 'output']
+        self.sys_call = ['input', 'output', 'flagrd',
+                         'flagrsrt', 'loadhd', 'storehd',
+                         'movehdmem', 'writeosmem', 'setprogos',
+                         'savepcprog', 'setpcprog',
+                         'printf', 'scanf', 'setInitialStack', 'setInitialMem', 'regtomem', 'memtoreg']
         self.visit(ast_)
         self.count_args = 0
         self.list_args = []
