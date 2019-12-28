@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="7dc8e40c-6eeb-4584-84b0-f5d1525fac31" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/asm_to_bin.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/asm_to_bin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testes/pudim2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testes/pudim2.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/intermedCode.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/intermedCode.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/intermediate_to_assembly.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/intermediate_to_assembly.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/semanticAnalysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/semanticAnalysis.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -228,11 +229,11 @@
     <state x="339" y="225" key="com.intellij.ide.util.TipDialog/0.27.1366.741@0.27.1366.741" timestamp="1576706267825" />
     <state x="339" y="542" key="com.intellij.ide.util.TipDialog/0.344.2806.741@0.344.2806.741" timestamp="1576767719433" />
     <state x="165" y="225" key="com.intellij.ide.util.TipDialog/1366.0.1366.768/0.27.1366.741@0.27.1366.741" timestamp="1577467930390" />
-    <state x="34" y="0" width="1015" height="630" key="dock-window-1" timestamp="1577497717438">
+    <state x="34" y="0" width="1015" height="630" maximized="true" key="dock-window-1" timestamp="1577536848777">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="1366" y="27" width="1015" height="630" key="dock-window-1/1366.0.1366.768/0.27.1366.741@0.27.1366.741" timestamp="1577468045674" />
-    <state x="34" y="0" width="1015" height="630" key="dock-window-1/1366.0.1366.768/0.27.1366.741@1366.0.1366.768" timestamp="1577497717438" />
+    <state x="34" y="0" width="1015" height="630" maximized="true" key="dock-window-1/1366.0.1366.768/0.27.1366.741@1366.0.1366.768" timestamp="1577536848777" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

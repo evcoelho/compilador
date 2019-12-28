@@ -500,6 +500,11 @@ class IntermediateToAssembly:
                     self.temp_to_register[arg1[1]] = -1
                     self.temp_to_register[arg2[1]] = -1
 
+                if inter[1] == 'regtoreg':
+                    arg2 = self.stack_args.pop()
+                    arg1 = self.stack_args.pop()
+                    self.assembly.append(['move', f'$r{arg1}', f'$r{arg2}'])
+
             if inter[0] == 'go_to':
                 self.assembly.append(['jmpi', f'{inter[1]}'])
 

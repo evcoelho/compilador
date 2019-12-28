@@ -15,7 +15,7 @@ class IntermedCode(createAST.AstVisitor):
                          'flagrsrt', 'loadhd', 'storehd',
                          'movehdmem', 'writeosmem', 'setprogos',
                          'savepcprog', 'setpcprog',
-                         'printf', 'scanf', 'setInitialStack', 'setInitialMem', 'regtomem', 'memtoreg']
+                         'printf', 'scanf', 'setInitialStack', 'setInitialMem', 'regtomem', 'memtoreg','regtoreg']
         self.visit(ast_)
 
 
@@ -267,7 +267,8 @@ class IntermedCode(createAST.AstVisitor):
                     and no.id_ != 'setInitialStack' \
                     and no.id_ != 'setInitialMem'\
                     and no.id_ != 'regtomem'\
-                    and no.id_ != 'memtoreg':
+                    and no.id_ != 'memtoreg'\
+                    and no.id_ != 'regtoreg':
                 lista_aux = ['assign_ret', f't{self.temp}', 'RT', '']
                 self.intermediario.append(lista_aux)
                 return f't{self.temp}'

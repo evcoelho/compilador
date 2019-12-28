@@ -30,7 +30,7 @@ class SemanticAnalysisTableG(createAST.AstVisitor):
                          'flagrsrt', 'loadhd', 'storehd',
                          'movehdmem', 'writeosmem', 'setprogos',
                          'savepcprog', 'setpcprog',
-                         'printf', 'scanf', 'setInitialStack', 'setInitialMem', 'regtomem', 'memtoreg']
+                         'printf', 'scanf', 'setInitialStack', 'setInitialMem', 'regtomem', 'memtoreg', 'regtoreg']
         self.visit(ast_)
         self.count_args = 0
         self.list_args = []
