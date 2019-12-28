@@ -388,7 +388,7 @@ class IntermediateToAssembly:
                     self.assembly.append(['loadi', f'$interrupt', '2'])
                     self.assembly.append(['setprogos', ' '])
 
-                if inter[1] == 'setInicialStack':
+                if inter[1] == 'setInitialStack':
                     arg = self.stack_args.pop()
                     type1 = self.search_type(arg[1])
                     RS = self.ret_reg_free()

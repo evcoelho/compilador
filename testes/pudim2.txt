@@ -7,5 +7,6 @@ void main(void)
 	r = vet[0]-vet[1];
 	output(vet[0]);
 	writeosmem(1,2,3);
+	setInitialStack(500);
 	flagrd();
 }

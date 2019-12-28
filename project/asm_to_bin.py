@@ -22,7 +22,15 @@ class AsmToBin:
             code = 'mem_ram_os[' + str(line_n) + "] = 32'b"
             aux = line
             for i in range(0, len(line)):
-                if line[i] == '$rt':
+                if line[i] == '$rmem':
+                    line[i] = '$r24'
+                elif line[i] == '$rout':
+                    line[i] = '$r25'
+                elif line[i] == '$interrupt':
+                    line[i] = '$r26'
+                elif line[i] == '$rpc':
+                    line[i] = '$r27'
+                elif line[i] == '$rt':
                     line[i] = '$r28'
                 elif line[i] == '$stp':
                     line[i] = '$r29'
