@@ -1,0 +1,67 @@
+
+
+    i = 0;
+    while(i < 200){
+    movehdmem(i,i,1);
+    i = i+1;
+    }
+    /*mudar end base da memoria */
+    a = 512;
+    memtoreg(22,a);
+    flagrd();
+    regtoreg(24,22);
+    flagrd();
+    /*------------------------*/
+
+    /*mudar end base da pilha */
+    a = 512;
+    memtoreg(22,a);
+    flagrd();
+    regtoreg(29,22);
+    flagrd();
+    /*------------------------*/
+    while(controle == 1){
+        setpcprog();
+        flagrd();
+        flagrsrt();
+        setprogos();
+        flagrsrt();
+        flagrd();
+        savepcprog();
+
+        /*tratando interrupcao */
+        flagrsrt();
+        regtoreg(26,26);
+        flagrsrt();
+        regtomem(26,interrupt);
+        output(interrupt);
+        if(interrupt == 0){  /* fim do programa */
+            controle = 0;
+        }
+        if(interrupt == 1){ /* printf */
+            flagrsrt();
+            regtoreg(25,25);
+            flagrsrt();
+            regtomem(25,saida);
+            output(saida);
+
+            interrupt = 0;
+            memtoreg(26,interrupt);
+            flagrd();
+            regtoreg(26,26);
+            flagrd();
+        }
+        if(interrupt == 2){ /* scanf */
+            entrada = input();
+            memtoreg(28,entrada);
+            flagrd();
+            regtoreg(28,28);
+            flagrd();
+
+            interrupt = 0;
+            memtoreg(26,interrupt);
+            flagrd();
+            regtoreg(26,26);
+            flagrd();
+        }
+    }

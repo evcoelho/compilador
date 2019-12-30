@@ -2,10 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7dc8e40c-6eeb-4584-84b0-f5d1525fac31" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/testes/bios.cminus" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testes/bunnyOS.cminus" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testes/bunnyos.backup" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testes/prog1.cminus" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testes/prog2.cminus" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/intermedCode.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/intermedCode.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin.txt" beforeDir="false" afterPath="$PROJECT_DIR$/bin.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/asm_to_bin.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/asm_to_bin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/intermediate_to_assembly.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/intermediate_to_assembly.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/semanticAnalysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/semanticAnalysis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testes/pudim2.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -183,15 +189,6 @@
     </task>
     <servers />
   </component>
-  <component name="TodoView">
-    <todo-panel id="selected-file">
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-    <todo-panel id="all">
-      <are-packages-shown value="true" />
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-  </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.tokens" />
   </component>
@@ -223,17 +220,26 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="165" y="225" key="com.intellij.ide.util.TipDialog" timestamp="1577467930390">
-      <screen x="0" y="27" width="1366" height="741" />
+    <state x="1721" y="202" width="646" height="397" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1577664487868">
+      <screen x="1366" y="0" width="1366" height="768" />
+    </state>
+    <state x="1721" y="202" width="646" height="397" key="#com.intellij.fileTypes.FileTypeChooser/1366.0.1366.768/0.27.1366.741@1366.0.1366.768" timestamp="1577664487868" />
+    <state x="1531" y="205" key="com.intellij.ide.util.TipDialog" timestamp="1577554630149">
+      <screen x="1366" y="0" width="1366" height="768" />
     </state>
     <state x="339" y="225" key="com.intellij.ide.util.TipDialog/0.27.1366.741@0.27.1366.741" timestamp="1576706267825" />
     <state x="339" y="542" key="com.intellij.ide.util.TipDialog/0.344.2806.741@0.344.2806.741" timestamp="1576767719433" />
     <state x="165" y="225" key="com.intellij.ide.util.TipDialog/1366.0.1366.768/0.27.1366.741@0.27.1366.741" timestamp="1577467930390" />
-    <state x="34" y="0" width="1015" height="630" maximized="true" key="dock-window-1" timestamp="1577536848777">
-      <screen x="0" y="27" width="1366" height="741" />
+    <state x="1531" y="205" key="com.intellij.ide.util.TipDialog/1366.0.1366.768/0.27.1366.741@1366.0.1366.768" timestamp="1577554630148" />
+    <state x="1817" y="317" width="454" height="167" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1577584897285">
+      <screen x="1366" y="0" width="1366" height="768" />
+    </state>
+    <state x="1817" y="317" width="454" height="167" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/1366.0.1366.768/0.27.1366.741@1366.0.1366.768" timestamp="1577584897285" />
+    <state x="1207" y="0" width="1010" height="505" key="dock-window-1" timestamp="1577679527148">
+      <screen x="1366" y="0" width="1366" height="768" />
     </state>
     <state x="1366" y="27" width="1015" height="630" key="dock-window-1/1366.0.1366.768/0.27.1366.741@0.27.1366.741" timestamp="1577468045674" />
-    <state x="34" y="0" width="1015" height="630" maximized="true" key="dock-window-1/1366.0.1366.768/0.27.1366.741@1366.0.1366.768" timestamp="1577536848777" />
+    <state x="1207" y="0" width="1010" height="505" key="dock-window-1/1366.0.1366.768/0.27.1366.741@1366.0.1366.768" timestamp="1577679527148" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

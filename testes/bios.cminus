@@ -1,0 +1,18 @@
+
+
+void main(void)
+{
+   int i;
+   int a;
+   int b;
+   int c;
+   a = input();
+   b = input();
+   c = a + b;
+   output(c);
+   i = 0;
+   while(i < 1200){
+    writeosmem(i,i,0);
+    i = i+1;
+   }
+}

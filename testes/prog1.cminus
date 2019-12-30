@@ -1,0 +1,12 @@
+
+
+void main(void)
+{
+   int a;
+   int b;
+   int c;
+   a = scanf();
+   b = scanf();
+   c = a - b;
+   printf(c);
+}

@@ -19,7 +19,7 @@ class AsmToBin:
                 i += 1
 
         for line in self.assembly:
-            code = 'mem_ram_os[' + str(line_n) + "] = 32'b"
+            code = 'HD[' + str(line_n) + "] = 32'b"
             aux = line
             for i in range(0, len(line)):
                 if line[i] == '$rmem':
@@ -235,7 +235,45 @@ class AsmToBin:
                                                                      int(line[1][2:]),
                                                                      int(line[2][2:]),
                                                                      0) + '; //' + str(aux))
+            elif line[0] == 'flagrd':
+                self.bin.append(
+                    code + '{0:06b}_{1:026b}'.format(37, 0) + '; //' + str(aux))
+
+            elif line[0] == 'flagrsrt':
+                self.bin.append(
+                    code + '{0:06b}_{1:026b}'.format(38, 0) + '; //' + str(aux))
+
+            elif line[0] == 'movehdmem':
+                self.bin.append(
+                    code + '{0:06b}_{1:05b}_{2:05b}_{3:05b}_{4:011b}'.format(41,
+                                                                             int(line[1][2:]),
+                                                                             int(line[2][2:]),
+                                                                             int(line[3][2:]),
+                                                                             0) + '; //' + str(aux))
+
+            elif line[0] == 'writeosmem':
+                self.bin.append(
+                    code + '{0:06b}_{1:05b}_{2:05b}_{3:05b}_{4:011b}'.format(42,
+                                                                             int(line[1][2:]),
+                                                                             int(line[2][2:]),
+                                                                             int(line[3][2:]),
+                                                                             0) + '; //' + str(aux))
+
+            elif line[0] == 'setprogos':
+                self.bin.append(
+                    code + '{0:06b}_{1:026b}'.format(43, 0) + '; //' + str(aux))
+
+            elif line[0] == 'savepcprog':
+                self.bin.append(
+                    code + '{0:06b}_{1:026b}'.format(44, 0) + '; //' + str(aux))
+
+            elif line[0] == 'setpcprog':
+                self.bin.append(
+                    code + '{0:06b}_{1:05b}_{2:021b}'.format(45,
+                                                                             int(line[1][2:]),
+                                                                             0) + '; //' + str(aux))
+
             if len(line) > 1:
                 line_n += 1
 
-        self.bin.append('mem_ram_os[' + str(line_n) + "] = 32'b" + '{0:06b}_{1:026b}'.format(25, 0) + '; // halt')
+        self.bin.append('HD[' + str(line_n) + "] = 32'b" + '{0:06b}_{1:026b}'.format(25, 0) + '; // halt')

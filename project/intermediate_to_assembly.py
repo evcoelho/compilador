@@ -21,9 +21,12 @@ class IntermediateToAssembly:
 
     def convertToAssembly(self):
 
-        self.assembly.append(['loadi', '$r0', '0'])
+        self.assembly.append(['loadi', '$rpc', '0'])
         self.assembly.append(['loadi', '$stp', '0'])
+        self.assembly.append(['loadi', '$rmem', '0'])
+        self.assembly.append(['loadi', '$r0', '0'])
         self.assembly.append(['loadi', '$ra', '0'])
+        self.assembly.append(['loadi', '$interrupt', '0'])
         self.assembly.append(['jmpi', 'main'])
         for inter in self.intermediate.intermediario:
 
@@ -34,14 +37,17 @@ class IntermediateToAssembly:
                 for i in range(0, self.get_qtd_args_function(inter[1])):
                     type = self.search_type(lista_args[i])
                     RD = self.ret_reg_free()
+                    RS = self.ret_reg_free()
 
                     if type == 'var':
                         pos_men = self.get_mem_pos(lista_args[i])
                         self.assembly.append(['subi', f'$stp', '$stp', '1'])
                         self.assembly.append(['pop', f'$r{RD}', '$stp'])
-                        self.assembly.append(['loadi', f'$rl', pos_men])
-                        self.assembly.append(['store', f'$r{RD}', f'$rl'])
+                        self.assembly.append(['loadi', f'$rl', pos_men]) #add rmem
+                        self.assembly.append(['add', f'$r{RS}', f'$rmem', f'$rl']) #add rmem
+                        self.assembly.append(['store', f'$r{RD}', f'$r{RS}'])
                     self.free_reg(RD)
+                    self.free_reg(RS)
 
 
             if inter[0] == 'label':
@@ -80,10 +86,12 @@ class IntermediateToAssembly:
             if inter[0] == 'jump_if_false':
                 type1 = self.search_type(inter[1])
                 RS = self.ret_reg_free()
+                raux = self.ret_reg_free()
                 if type1 == 'var':
                     pos_men = self.get_mem_pos(inter[1])
                     self.assembly.append(['loadi', f'$rl', pos_men])
-                    self.assembly.append(['load', f'$r{RS}', '$rl'])
+                    self.assembly.append(['add', f'$r{raux}', f'$rmem', f'$rl'])  #---------
+                    self.assembly.append(['load', f'$r{RS}', f'$r{raux}'])
                 elif type1 == 'imt':
                     self.assembly.append(['loadi', f'$r{RS}', inter[1]])
                 elif type1 == 'temp':
@@ -92,6 +100,7 @@ class IntermediateToAssembly:
                         RS = self.temp_to_register[inter[1]]
                 self.assembly.append(['jei', f'$r0', f'$r{RS}', inter[2]])
                 self.free_reg(RS)
+                self.free_reg(raux)
                 self.temp_to_register[inter[1]] = -1
 
             if inter[0] == 'addition':
@@ -117,10 +126,12 @@ class IntermediateToAssembly:
             if inter[0] == 'assign':
                 type1 = self.search_type(inter[1])
                 RS = self.ret_reg_free()
+                raux = self.ret_reg_free()
 
                 if type1 == 'var':
                     pos_men = self.get_mem_pos(inter[1])
-                    self.assembly.append(['loadi', f'$r{RS}', pos_men])
+                    self.assembly.append(['loadi', f'$rl', pos_men]) #---------
+                    self.assembly.append(['add', f'$r{RS}', f'$rmem', f'$rl']) #---------
                 elif type1 == 'imt':
                     self.assembly.append(['loadi', f'$r{RS}', inter[1]])
                 elif type1 == 'temp':
@@ -134,7 +145,9 @@ class IntermediateToAssembly:
                 if type2 == 'var':
                     pos_men = self.get_mem_pos(inter[2])
                     self.assembly.append(['loadi', f'$rl', pos_men])
-                    self.assembly.append(['load', f'$r{RD}', f'$rl'])
+                    self.assembly.append(['add', f'$r{raux}', f'$rmem', f'$rl']) #-------
+                    self.assembly.append(['load', f'$r{RD}', f'$r{raux}'])  #--------
+                    # self.assembly.append(['load', f'$r{RD}', f'$rl'])
                 elif type2 == 'imt':
                     self.assembly.append(['loadi',  f'$r{RD}', inter[2]])
                 elif type2 == 'temp':
@@ -147,14 +160,17 @@ class IntermediateToAssembly:
                 self.temp_to_register[inter[1]] = -1
                 self.free_reg(RD)
                 self.temp_to_register[inter[2]] = -1
+                self.free_reg(raux)
 
             if inter[0] == 'return':
                 type1 = self.search_type(inter[1])
                 RS = self.ret_reg_free()
+                raux = self.ret_reg_free()
 
                 if type1 == 'var':
                     pos_men = self.get_mem_pos(inter[1])
-                    self.assembly.append(['loadi', f'$r{RS}', pos_men])
+                    self.assembly.append(['loadi', f'$r{raux}', pos_men]) #----------
+                    self.assembly.append(['add', f'$r{RS}', f'$rmem', f'$r{raux}'])  #---------
                     self.assembly.append(['load', f'$rt', f'$r{RS}'])
                 elif type1 == 'imt':
                     self.assembly.append(['loadi', f'$rt', inter[1]])
@@ -165,6 +181,7 @@ class IntermediateToAssembly:
                         self.assembly.append(['move', f'$rt', f'$r{RS}'])
                 self.assembly.append(['jmp', f'$ra'])
                 self.free_reg(RS)
+                self.free_reg(raux)
                 self.temp_to_register[inter[1]] = -1
                 self.free_all_reg()
 
@@ -177,18 +194,24 @@ class IntermediateToAssembly:
                     arg = self.stack_args.pop()
                     type1 = self.search_type(arg[1])
                     RS = self.ret_reg_free()
+                    raux = self.ret_reg_free()
 
                     if type1 == 'var':
                         pos_men = self.get_mem_pos(arg[1])
                         if self.is_a_vet(arg[1]):
                             if self.is_a_parameter(arg[1]):
                                 self.assembly.append(['loadi', f'$rl', pos_men])
-                                self.assembly.append(['load', f'$r{RS}', f'$rl'])
+                                self.assembly.append(['add', f'$r{raux}', f'$rmem', f'$rl']) #------
+                                self.assembly.append(['load', f'$r{RS}', f'$r{raux}'])  #--------
+                                # self.assembly.append(['load', f'$r{RS}', f'$rl'])
                             else:
-                                self.assembly.append(['loadi', f'$r{RS}', pos_men])
+                                self.assembly.append(['loadi', f'$r{raux}', pos_men])
+                                self.assembly.append(['add', f'$r{RS}', f'$rmem', f'$r{raux}'])  # ------
                         else:
                             self.assembly.append(['loadi', f'$rl', pos_men])
-                            self.assembly.append(['load', f'$r{RS}', f'$rl'])
+                            self.assembly.append(['add', f'$r{raux}', f'$rmem', f'$rl'])  # ------
+                            self.assembly.append(['load', f'$r{RS}', f'$r{raux}'])  # --------
+                            # self.assembly.append(['load', f'$r{RS}', f'$rl'])
                     elif type1 == 'imt':
                         self.assembly.append(['loadi', f'$r{RS}', arg[1]])
                     elif type1 == 'temp':
@@ -200,6 +223,7 @@ class IntermediateToAssembly:
                     self.assembly.append(['addi', f'$stp', '$stp', '1'])
 
                     self.free_reg(RS)
+                    self.free_reg(raux)
                     self.temp_to_register[inter[1]] = -1
 
                 self.assembly.append(['jal', inter[1]])
@@ -224,11 +248,14 @@ class IntermediateToAssembly:
                     arg = self.stack_args.pop()
                     type1 = self.search_type(arg[1])
                     RS = self.ret_reg_free()
+                    raux = self.ret_reg_free()
 
                     if type1 == 'var':
                         pos_men = self.get_mem_pos(arg[1])
                         self.assembly.append(['loadi', f'$rl', pos_men])
-                        self.assembly.append(['load', f'$r{RS}', f'$rl'])
+                        self.assembly.append(['add', f'$r{raux}', f'$rmem', f'$rl']) #------------
+                        self.assembly.append(['load', f'$r{RS}', f'$r{raux}']) #-------------
+                        # self.assembly.append(['load', f'$r{RS}', f'$rl'])
                     elif type1 == 'imt':
                         self.assembly.append(['loadi', f'$r{RS}', arg[1]])
                     elif type1 == 'temp':
@@ -237,6 +264,7 @@ class IntermediateToAssembly:
                             RS = self.temp_to_register[arg[1]]
                     self.assembly.append(['out', f'$r{RS}'])
                     self.free_reg(RS)
+                    self.free_reg(raux)
                     self.temp_to_register[arg[1]] = -1
 
                 if inter[1] == 'flagrd':
@@ -250,11 +278,14 @@ class IntermediateToAssembly:
                     arg3 = self.stack_args.pop()
                     type1 = self.search_type(arg3[1])
                     RT = self.ret_reg_free()
+                    raux = self.ret_reg_free()
 
                     if type1 == 'var':
                         pos_men = self.get_mem_pos(arg3[1])
                         self.assembly.append(['loadi', f'$rl', pos_men])
-                        self.assembly.append(['load', f'$r{RT}', f'$rl'])
+                        self.assembly.append(['add', f'$r{raux}', f'$rmem', f'$rl'])  # --------------------
+                        self.assembly.append(['load', f'$r{RT}', f'$r{raux}'])  # ----------------------
+                        # self.assembly.append(['load', f'$r{RT}', f'$rl'])
                     elif type1 == 'imt':
                         self.assembly.append(['loadi', f'$r{RT}', arg3[1]])
                     elif type1 == 'temp':
@@ -269,7 +300,9 @@ class IntermediateToAssembly:
                     if type1 == 'var':
                         pos_men = self.get_mem_pos(arg2[1])
                         self.assembly.append(['loadi', f'$rl', pos_men])
-                        self.assembly.append(['load', f'$r{RS}', f'$rl'])
+                        self.assembly.append(['add', f'$r{raux}', f'$rmem', f'$rl'])  # --------------------
+                        self.assembly.append(['load', f'$r{RS}', f'$r{raux}'])  # ----------------------
+                        # self.assembly.append(['load', f'$r{RS}', f'$rl'])
                     elif type1 == 'imt':
                         self.assembly.append(['loadi', f'$r{RS}', arg2[1]])
                     elif type1 == 'temp':
@@ -284,7 +317,9 @@ class IntermediateToAssembly:
                     if type1 == 'var':
                         pos_men = self.get_mem_pos(arg1[1])
                         self.assembly.append(['loadi', f'$rl', pos_men])
-                        self.assembly.append(['load', f'$r{RD}', f'$rl'])
+                        self.assembly.append(['add', f'$r{raux}', f'$rmem', f'$rl'])  # --------------------
+                        self.assembly.append(['load', f'$r{RD}', f'$r{raux}'])  # ----------------------
+                        # self.assembly.append(['load', f'$r{RD}', f'$rl'])
                     elif type1 == 'imt':
                         self.assembly.append(['loadi', f'$r{RD}', arg1[1]])
                     elif type1 == 'temp':
@@ -296,6 +331,7 @@ class IntermediateToAssembly:
                     self.free_reg(RD)
                     self.free_reg(RS)
                     self.free_reg(RT)
+                    self.free_reg(raux)
                     self.temp_to_register[arg1[1]] = -1
                     self.temp_to_register[arg2[1]] = -1
                     self.temp_to_register[arg3[1]] = -1
@@ -304,11 +340,14 @@ class IntermediateToAssembly:
                     arg3 = self.stack_args.pop()
                     type1 = self.search_type(arg3[1])
                     RT = self.ret_reg_free()
+                    raux = self.ret_reg_free()
 
                     if type1 == 'var':
                         pos_men = self.get_mem_pos(arg3[1])
                         self.assembly.append(['loadi', f'$rl', pos_men])
-                        self.assembly.append(['load', f'$r{RT}', f'$rl'])
+                        self.assembly.append(['add', f'$r{raux}', f'$rmem', f'$rl'])  # --------------------
+                        self.assembly.append(['load', f'$r{RT}', f'$r{raux}'])  # ----------------------
+                        # self.assembly.append(['load', f'$r{RT}', f'$rl'])
                     elif type1 == 'imt':
                         self.assembly.append(['loadi', f'$r{RT}', arg3[1]])
                     elif type1 == 'temp':
@@ -323,7 +362,9 @@ class IntermediateToAssembly:
                     if type1 == 'var':
                         pos_men = self.get_mem_pos(arg2[1])
                         self.assembly.append(['loadi', f'$rl', pos_men])
-                        self.assembly.append(['load', f'$r{RS}', f'$rl'])
+                        self.assembly.append(['add', f'$r{raux}', f'$rmem', f'$rl'])  # --------------------
+                        self.assembly.append(['load', f'$r{RS}', f'$r{raux}'])  # ----------------------
+                        # self.assembly.append(['load', f'$r{RS}', f'$rl'])
                     elif type1 == 'imt':
                         self.assembly.append(['loadi', f'$r{RS}', arg2[1]])
                     elif type1 == 'temp':
@@ -338,7 +379,9 @@ class IntermediateToAssembly:
                     if type1 == 'var':
                         pos_men = self.get_mem_pos(arg1[1])
                         self.assembly.append(['loadi', f'$rl', pos_men])
-                        self.assembly.append(['load', f'$r{RD}', f'$rl'])
+                        self.assembly.append(['add', f'$r{raux}', f'$rmem', f'$rl'])  # --------------------
+                        self.assembly.append(['load', f'$r{RD}', f'$r{raux}'])  # ----------------------
+                        # self.assembly.append(['load', f'$r{RD}', f'$rl'])
                     elif type1 == 'imt':
                         self.assembly.append(['loadi', f'$r{RD}', arg1[1]])
                     elif type1 == 'temp':
@@ -350,12 +393,15 @@ class IntermediateToAssembly:
                     self.free_reg(RD)
                     self.free_reg(RS)
                     self.free_reg(RT)
+                    self.free_reg(raux)
                     self.temp_to_register[arg1[1]] = -1
                     self.temp_to_register[arg2[1]] = -1
                     self.temp_to_register[arg3[1]] = -1
 
                 if inter[1] == 'setprogos':
+                    self.assembly.append(['nop', ' '])
                     self.assembly.append(['setprogos', ' '])
+                    self.assembly.append(['nop', ' '])
 
                 if inter[1] == 'savepcprog':
                     self.assembly.append(['savepcprog', ' '])
@@ -367,74 +413,46 @@ class IntermediateToAssembly:
                     arg = self.stack_args.pop()
                     type1 = self.search_type(arg[1])
                     RS = self.ret_reg_free()
-
+                    raux = self.ret_reg_free()
                     if type1 == 'var':
                         pos_men = self.get_mem_pos(arg[1])
                         self.assembly.append(['loadi', f'$rl', pos_men])
-                        self.assembly.append(['load', f'$r{RS}', f'$rl'])
+                        self.assembly.append(['add', f'$r{raux}', f'$rmem', f'$rl'])  # --------------------
+                        self.assembly.append(['load', f'$r{RS}', f'$r{raux}'])  # ----------------------
+                        # self.assembly.append(['load', f'$r{RS}', f'$rl'])
                     elif type1 == 'imt':
                         self.assembly.append(['loadi', f'$r{RS}', arg[1]])
                     elif type1 == 'temp':
                         if arg[1] in self.temp_to_register:
                             self.free_reg(RS)
                             RS = self.temp_to_register[arg[1]]
-                    self.assembly.append(['move', f'rout', f'$r{RS}'])
+                    self.assembly.append(['move', f'$rout', f'$r{RS}'])
                     self.assembly.append(['loadi', f'$interrupt', '1'])
+                    self.assembly.append(['nop', ' '])
                     self.assembly.append(['setprogos', ' '])
+                    self.assembly.append(['nop', ' '])
                     self.free_reg(RS)
+                    self.free_reg(raux)
                     self.temp_to_register[arg[1]] = -1
 
                 if inter[1] == 'scanf':
                     self.assembly.append(['loadi', f'$interrupt', '2'])
+                    self.assembly.append(['nop', ' '])
                     self.assembly.append(['setprogos', ' '])
+                    self.assembly.append(['nop', ' '])
 
-                if inter[1] == 'setInitialStack':
-                    arg = self.stack_args.pop()
-                    type1 = self.search_type(arg[1])
-                    RS = self.ret_reg_free()
 
-                    if type1 == 'var':
-                        pos_men = self.get_mem_pos(arg[1])
-                        self.assembly.append(['loadi', f'$rl', pos_men])
-                        self.assembly.append(['load', f'$r{RS}', f'$rl'])
-                    elif type1 == 'imt':
-                        self.assembly.append(['loadi', f'$r{RS}', arg[1]])
-                    elif type1 == 'temp':
-                        if arg[1] in self.temp_to_register:
-                            self.free_reg(RS)
-                            RS = self.temp_to_register[arg[1]]
-                    self.assembly.append(['move', f'$stp', f'$r{RS}'])
-                    self.free_reg(RS)
-                    self.temp_to_register[arg[1]] = -1
 
-                if inter[1] == 'setInicialMem':
-                    arg = self.stack_args.pop()
-                    type1 = self.search_type(arg[1])
-                    RS = self.ret_reg_free()
-
-                    if type1 == 'var':
-                        pos_men = self.get_mem_pos(arg[1])
-                        self.assembly.append(['loadi', f'$rl', pos_men])
-                        self.assembly.append(['load', f'$r{RS}', f'$rl'])
-                    elif type1 == 'imt':
-                        self.assembly.append(['loadi', f'$r{RS}', arg[1]])
-                    elif type1 == 'temp':
-                        if arg[1] in self.temp_to_register:
-                            self.free_reg(RS)
-                            RS = self.temp_to_register[arg[1]]
-                    self.assembly.append(['move', f'$rmem', f'$r{RS}'])
-                    self.free_reg(RS)
-                    self.temp_to_register[arg[1]] = -1
-
-                if inter[1] == 'regtomem':
+                if inter[1] == 'regtomem': # ---------------------------------------------------
                     arg2 = self.stack_args.pop()
                     type1 = self.search_type(arg2[1])
                     RS = self.ret_reg_free()
-
                     if type1 == 'var':
                         pos_men = self.get_mem_pos(arg2[1])
                         self.assembly.append(['loadi', f'$rl', pos_men])
-                        self.assembly.append(['load', f'$r{RS}', f'$rl'])
+                        self.assembly.append(['add', f'$r{RS}', f'$rmem', f'$rl'])  # --------------------
+                        # self.assembly.append(['load', f'$r{RS}', f'$r{raux}'])  # ----------------------
+                        # self.assembly.append(['load', f'$r{RS}', f'$rl'])
                     elif type1 == 'imt':
                         self.assembly.append(['loadi', f'$r{RS}', arg2[1]])
                     elif type1 == 'temp':
@@ -443,27 +461,12 @@ class IntermediateToAssembly:
                             RS = self.temp_to_register[arg2[1]]
 
                     arg1 = self.stack_args.pop()
-                    type1 = self.search_type(arg1[1])
-                    RD = self.ret_reg_free()
 
-                    if type1 == 'var':
-                        pos_men = self.get_mem_pos(arg1[1])
-                        self.assembly.append(['loadi', f'$rl', pos_men])
-                        self.assembly.append(['load', f'$r{RD}', f'$rl'])
-                    elif type1 == 'imt':
-                        self.assembly.append(['loadi', f'$r{RD}', arg1[1]])
-                    elif type1 == 'temp':
-                        if arg1[1] in self.temp_to_register:
-                            self.free_reg(RD)
-                            RD = self.temp_to_register[arg1[1]]
-
-                    self.assembly.append(['store', f'$r{RD}', f'$r{RS}'])
-                    self.free_reg(RD)
+                    self.assembly.append(['store', f'$r{arg1[1]}', f'$r{RS}'])
                     self.free_reg(RS)
-                    self.temp_to_register[arg1[1]] = -1
                     self.temp_to_register[arg2[1]] = -1
 
-                if inter[1] == 'memtoreg':
+                if inter[1] == 'memtoreg': # ------------------------------------------------------------
                     arg2 = self.stack_args.pop()
                     type1 = self.search_type(arg2[1])
                     RS = self.ret_reg_free()
@@ -471,7 +474,9 @@ class IntermediateToAssembly:
                     if type1 == 'var':
                         pos_men = self.get_mem_pos(arg2[1])
                         self.assembly.append(['loadi', f'$rl', pos_men])
-                        self.assembly.append(['load', f'$r{RS}', f'$rl'])
+                        self.assembly.append(['add', f'$r{RS}', f'$rmem', f'$rl'])  # --------------------
+                        # self.assembly.append(['load', f'$r{RS}', f'$r{raux}'])  # ----------------------
+                        # self.assembly.append(['load', f'$r{RS}', f'$rl'])
                     elif type1 == 'imt':
                         self.assembly.append(['loadi', f'$r{RS}', arg2[1]])
                     elif type1 == 'temp':
@@ -480,30 +485,15 @@ class IntermediateToAssembly:
                             RS = self.temp_to_register[arg2[1]]
 
                     arg1 = self.stack_args.pop()
-                    type1 = self.search_type(arg1[1])
-                    RD = self.ret_reg_free()
 
-                    if type1 == 'var':
-                        pos_men = self.get_mem_pos(arg1[1])
-                        self.assembly.append(['loadi', f'$rl', pos_men])
-                        self.assembly.append(['load', f'$r{RD}', f'$rl'])
-                    elif type1 == 'imt':
-                        self.assembly.append(['loadi', f'$r{RD}', arg1[1]])
-                    elif type1 == 'temp':
-                        if arg1[1] in self.temp_to_register:
-                            self.free_reg(RD)
-                            RD = self.temp_to_register[arg1[1]]
-
-                    self.assembly.append(['load', f'$r{RD}', f'$r{RS}'])
-                    self.free_reg(RD)
+                    self.assembly.append(['load', f'$r{arg1[1]}', f'$r{RS}'])
                     self.free_reg(RS)
-                    self.temp_to_register[arg1[1]] = -1
                     self.temp_to_register[arg2[1]] = -1
 
                 if inter[1] == 'regtoreg':
                     arg2 = self.stack_args.pop()
                     arg1 = self.stack_args.pop()
-                    self.assembly.append(['move', f'$r{arg1}', f'$r{arg2}'])
+                    self.assembly.append(['move', f'$r{arg1[1]}', f'$r{arg2[1]}'])
 
             if inter[0] == 'go_to':
                 self.assembly.append(['jmpi', f'{inter[1]}'])
@@ -513,11 +503,14 @@ class IntermediateToAssembly:
                     # self.assembly.append(['----------------------------'])
                     type1 = self.search_type(inter[1])
                     RS = self.ret_reg_free()
+                    raux = self.ret_reg_free()
 
                     if type1 == 'var':
                         pos_men = self.get_mem_pos(inter[1])
                         self.assembly.append(['loadi', f'$rl', pos_men])
-                        self.assembly.append(['load', f'$r{RS}', '$rl'])
+                        self.assembly.append(['add', f'$r{raux}', f'$rmem', f'$rl'])  # --------------------
+                        self.assembly.append(['load', f'$r{RS}', f'$r{raux}'])  # ----------------------
+                        # self.assembly.append(['load', f'$r{RS}', '$rl'])
 
                     type2 = self.search_type(inter[2])
                     RD = self.ret_reg_free()
@@ -525,7 +518,9 @@ class IntermediateToAssembly:
                     if type2 == 'var':
                         pos_men = self.get_mem_pos(inter[2])
                         self.assembly.append(['loadi', f'$rl', pos_men])
-                        self.assembly.append(['load', f'$r{RD}', f'$rl'])
+                        self.assembly.append(['add', f'$r{raux}', f'$rmem', f'$rl'])  # --------------------
+                        self.assembly.append(['load', f'$r{RD}', f'$r{raux}'])  # ----------------------
+                        # self.assembly.append(['load', f'$r{RD}', f'$rl'])
                     elif type2 == 'imt':
                         self.assembly.append(['loadi', f'$r{RD}', inter[2]])
                     elif type2 == 'temp':
@@ -541,16 +536,18 @@ class IntermediateToAssembly:
                     self.free_reg(RS)
                     self.temp_to_register[inter[1]] = -1
                     self.free_reg(RD)
+                    self.free_reg(raux)
                     self.temp_to_register[inter[2]] = -1
                     # self.assembly.append(['----------------------------'])
                 else:
                     # self.assembly.append(['----------------------------'])
                     type1 = self.search_type(inter[1])
                     RS = self.ret_reg_free()
-
+                    raux = self.ret_reg_free()
                     if type1 == 'var':
                         pos_men = self.get_mem_pos(inter[1])
-                        self.assembly.append(['loadi', f'$r{RS}', pos_men])
+                        self.assembly.append(['loadi', f'$r{raux}', pos_men])
+                        self.assembly.append(['add', f'$r{RS}', f'$rmem', f'$r{raux}'])  # --------------------
 
                     type2 = self.search_type(inter[2])
                     RD = self.ret_reg_free()
@@ -558,7 +555,9 @@ class IntermediateToAssembly:
                     if type2 == 'var':
                         pos_men = self.get_mem_pos(inter[2])
                         self.assembly.append(['loadi', f'$rl', pos_men])
-                        self.assembly.append(['load', f'$r{RD}', f'$rl'])
+                        self.assembly.append(['add', f'$r{raux}', f'$rmem', f'$rl'])  # --------------------
+                        self.assembly.append(['load', f'$r{RD}', f'$r{raux}'])  # ----------------------
+                        # self.assembly.append(['load', f'$r{RD}', f'$rl'])
                     elif type2 == 'imt':
                         self.assembly.append(['loadi', f'$r{RD}', inter[2]])
                     elif type2 == 'temp':
@@ -574,6 +573,7 @@ class IntermediateToAssembly:
                     self.free_reg(RS)
                     self.temp_to_register[inter[1]] = -1
                     self.free_reg(RD)
+                    self.free_reg(raux)
                     self.temp_to_register[inter[2]] = -1
                     # self.assembly.append(['----------------------------'])
 
@@ -582,11 +582,14 @@ class IntermediateToAssembly:
                 if self.is_a_parameter(inter[1]):
                     type1 = self.search_type(inter[1])
                     RS = self.ret_reg_free()
+                    raux = self.ret_reg_free()
 
                     if type1 == 'var':
                         pos_men = self.get_mem_pos(inter[1])
                         self.assembly.append(['loadi', f'$rl', pos_men])
-                        self.assembly.append(['load', f'$r{RS}', '$rl'])
+                        self.assembly.append(['add', f'$r{raux}', f'$rmem', f'$rl'])  # --------------------
+                        self.assembly.append(['load', f'$r{RS}', f'$r{raux}'])  # ----------------------
+                        # self.assembly.append(['load', f'$r{RS}', '$rl'])
 
                     type2 = self.search_type(inter[2])
                     RD = self.ret_reg_free()
@@ -594,7 +597,9 @@ class IntermediateToAssembly:
                     if type2 == 'var':
                         pos_men = self.get_mem_pos(inter[2])
                         self.assembly.append(['loadi', f'$rl', pos_men])
-                        self.assembly.append(['load', f'$r{RD}', f'$rl'])
+                        self.assembly.append(['add', f'$r{raux}', f'$rmem', f'$rl'])  # --------------------
+                        self.assembly.append(['load', f'$r{RD}', f'$r{raux}'])  # ----------------------
+                        # self.assembly.append(['load', f'$r{RD}', f'$rl'])
                     elif type2 == 'imt':
                         self.assembly.append(['loadi', f'$r{RD}', inter[2]])
                     elif type2 == 'temp':
@@ -612,14 +617,16 @@ class IntermediateToAssembly:
                     self.free_reg(RS)
                     self.temp_to_register[inter[1]] = -1
                     self.free_reg(RD)
+                    self.free_reg(raux)
                     self.temp_to_register[inter[2]] = -1
                 else:
                     type1 = self.search_type(inter[1])
                     RS = self.ret_reg_free()
-
+                    raux = self.ret_reg_free()
                     if type1 == 'var':
                         pos_men = self.get_mem_pos(inter[1])
-                        self.assembly.append(['loadi', f'$r{RS}', pos_men])
+                        self.assembly.append(['loadi', f'$r{raux}', pos_men])
+                        self.assembly.append(['add', f'$r{RS}', f'$rmem', f'$r{raux}'])  # --------------------
 
                     type2 = self.search_type(inter[2])
                     RD = self.ret_reg_free()
@@ -627,7 +634,9 @@ class IntermediateToAssembly:
                     if type2 == 'var':
                         pos_men = self.get_mem_pos(inter[2])
                         self.assembly.append(['loadi', f'$rl', pos_men])
-                        self.assembly.append(['load', f'$r{RD}', f'$rl'])
+                        self.assembly.append(['add', f'$r{raux}', f'$rmem', f'$rl'])  # --------------------
+                        self.assembly.append(['load', f'$r{RD}', f'$r{raux}'])  # ----------------------
+                        # self.assembly.append(['load', f'$r{RD}', f'$rl'])
                     elif type2 == 'imt':
                         self.assembly.append(['loadi', f'$r{RD}', inter[2]])
                     elif type2 == 'temp':
@@ -645,6 +654,7 @@ class IntermediateToAssembly:
                     self.free_reg(RS)
                     self.temp_to_register[inter[1]] = -1
                     self.free_reg(RD)
+                    self.free_reg(raux)
                     self.temp_to_register[inter[2]] = -1
                     # self.assembly.append(['----------------------------'])
 
@@ -681,12 +691,16 @@ class IntermediateToAssembly:
         for key in self.semantic_table:
             if re.match(f'{self.scope}.[a-zA-Z]', key):
                 RS = self.ret_reg_free()
+                raux = self.ret_reg_free()
                 pos_men = self.get_mem_pos(self.semantic_table[key].name)
                 self.stack_vars.append(self.semantic_table[key].name)
                 self.assembly.append(['loadi', f'$rl', pos_men])
-                self.assembly.append(['load', f'$r{RS}', f'$rl'])
+                self.assembly.append(['add', f'$r{raux}', f'$rmem', f'$rl'])  # --------------------
+                self.assembly.append(['load', f'$r{RS}', f'$r{raux}'])  # ----------------------
+                # self.assembly.append(['load', f'$r{RS}', f'$rl'])
                 self.assembly.append(['push', f'$r{RS}', f'$stp'])
                 self.assembly.append(['addi', f'$stp', '$stp', '1'])
+                self.free_reg(raux)
                 self.free_reg(RS)
         # self.assembly.append(['............................................'])
 
@@ -695,13 +709,18 @@ class IntermediateToAssembly:
         for i in range(0, len(self.stack_vars)):
 
                 register = self.ret_reg_free()
+                raux = self.ret_reg_free()
+
                 var = self.stack_vars.pop()
                 pos_men = self.get_mem_pos(var)
                 self.assembly.append(['subi', f'$stp', '$stp', '1'])
                 self.assembly.append(['pop', f'$r{register}', '$stp'])
                 self.assembly.append(['loadi', f'$rl', pos_men])
-                self.assembly.append(['store', f'$r{register}', '$rl'])
+                self.assembly.append(['add', f'$r{raux}', f'$rmem', f'$rl'])  # --------------------
+                self.assembly.append(['store', f'$r{register}', f'$r{raux}']) #--------------------
+                # self.assembly.append(['store', f'$r{register}', '$rl'])
                 self.free_reg(register)
+                self.free_reg(raux)
         # self.assembly.append(['............................................'])
 
     def push_temp_ocuped_in_stack(self):
@@ -735,11 +754,13 @@ class IntermediateToAssembly:
 
         type1 = self.search_type(inst[1])
         RS = self.ret_reg_free()
-
+        raux = self.ret_reg_free()
         if type1 == 'var':
             pos_men = self.get_mem_pos(inst[1])
             self.assembly.append(['loadi', f'$rl', pos_men])
-            self.assembly.append(['load', f'$r{RS}', f'$rl'])
+            self.assembly.append(['add', f'$r{raux}', f'$rmem', f'$rl'])  # --------------------
+            self.assembly.append(['load', f'$r{RS}', f'$r{raux}'])  # ----------------------
+            # self.assembly.append(['load', f'$r{RS}', f'$rl'])
         elif type1 == 'imt':
             self.assembly.append(['loadi', f'$r{RS}', inst[1]])
         elif type1 == 'temp':
@@ -753,7 +774,9 @@ class IntermediateToAssembly:
         if type2 == 'var':
             pos_men = self.get_mem_pos(inst[2])
             self.assembly.append(['loadi', f'$rl', pos_men])
-            self.assembly.append(['load', f'$r{RT}', f'$rl'])
+            self.assembly.append(['add', f'$r{raux}', f'$rmem', f'$rl'])  # --------------------
+            self.assembly.append(['load', f'$r{RT}', f'$r{raux}'])  # ----------------------
+            # self.assembly.append(['load', f'$r{RT}', f'$rl'])
         elif type2 == 'imt':
             self.assembly.append(['loadi', f'$r{RT}', inst[2]])
         elif type2 == 'temp':
@@ -801,10 +824,13 @@ class IntermediateToAssembly:
             if reg[1] == 1:
                 reg[1] = 0
                 return reg[0]
+        for i in range(0, 10):
+            self.free_reg(i)
+        return self.ret_reg_free()
 
     def inicialize_reg_list(self):
         cont = 1
-        while cont < 21:
+        while cont < 22:
             self.status_reg.append([cont, 1])
             cont += 1
 
