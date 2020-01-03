@@ -59,7 +59,7 @@ void main(void)
         while(progatual < shell){
             if(fila[progatual] > 0){
                 i = 0;
-                while(i < 50){
+                while(i < 120){
                     movehdmem(i,i,fila[progatual]);
                     i = i+1;
                 }
@@ -416,328 +416,328 @@ void main(void)
                         regtoreg(31,22);
                         flagrd();
                     }
-                    /*if(progatual == 2){
-                         memtoreg(22,regprogtres[0]);
+                    if(progatual == 2){
+                       memtoreg(22,300);
                         flagrd();
                         regtoreg(0,22);
                         flagrd();
 
-                        memtoreg(22,regprogtres[1]);
+                        memtoreg(22,301);
                         flagrd();
                         regtoreg(1,22);
                         flagrd();
 
-                        memtoreg(22,regprogtres[2]);
+                        memtoreg(22,302);
                         flagrd();
                         regtoreg(2,22);
                         flagrd();
 
-                        memtoreg(22,regprogtres[3]);
+                        memtoreg(22,303);
                         flagrd();
                         regtoreg(3,22);
                         flagrd();
 
-                        memtoreg(22,regprogtres[4]);
+                        memtoreg(22,304);
                         flagrd();
                         regtoreg(4,22);
                         flagrd();
 
-                        memtoreg(22,regprogtres[5]);
+                        memtoreg(22,305);
                         flagrd();
                         regtoreg(5,22);
                         flagrd();
 
-                        memtoreg(22,regprogtres[6]);
+                        memtoreg(22,306);
                         flagrd();
                         regtoreg(6,22);
                         flagrd();
 
-                        memtoreg(22,regprogtres[7]);
+                        memtoreg(22,307);
                         flagrd();
                         regtoreg(7,22);
                         flagrd();
 
-                        memtoreg(22,regprogtres[8]);
+                        memtoreg(22,308);
                         flagrd();
                         regtoreg(8,22);
                         flagrd();
 
-                        memtoreg(22,regprogtres[9]);
+                        memtoreg(22,309);
                         flagrd();
                         regtoreg(9,22);
                         flagrd();
 
-                        memtoreg(22,regprogtres[10]);
+                        memtoreg(22,310);
                         flagrd();
                         regtoreg(10,22);
                         flagrd();
 
-                        memtoreg(22,regprogtres[11]);
+                        memtoreg(22,311);
                         flagrd();
                         regtoreg(11,22);
                         flagrd();
 
-                        memtoreg(22,regprogtres[12]);
+                        memtoreg(22,312);
                         flagrd();
                         regtoreg(12,22);
                         flagrd();
 
-                        memtoreg(22,regprogtres[13]);
+                        memtoreg(22,313);
                         flagrd();
                         regtoreg(13,22);
                         flagrd();
 
-                        memtoreg(22,regprogtres[14]);
+                        memtoreg(22,314);
                         flagrd();
                         regtoreg(14,22);
                         flagrd();
 
-                        memtoreg(22,regprogtres[15]);
+                        memtoreg(22,315);
                         flagrd();
                         regtoreg(15,22);
                         flagrd();
 
-                        memtoreg(22,regprogtres[16]);
+                        memtoreg(22,316);
                         flagrd();
                         regtoreg(16,22);
                         flagrd();
 
-                        memtoreg(22,regprogtres[17]);
+                        memtoreg(22,317);
                         flagrd();
                         regtoreg(17,22);
                         flagrd();
 
-                        memtoreg(22,regprogtres[18]);
+                        memtoreg(22,318);
                         flagrd();
                         regtoreg(18,22);
                         flagrd();
 
-                        memtoreg(22,regprogtres[19]);
+                        memtoreg(22,319);
                         flagrd();
                         regtoreg(19,22);
                         flagrd();
 
-                        memtoreg(22,regprogtres[20]);
+                        memtoreg(22,320);
                         flagrd();
                         regtoreg(20,22);
                         flagrd();
 
-                        memtoreg(22,regprogtres[21]);
+                        memtoreg(22,321);
                         flagrd();
                         regtoreg(21,22);
                         flagrd();
 
-                        memtoreg(22,regprogtres[22]);
+                        memtoreg(22,322);
                         flagrd();
                         regtoreg(22,22);
                         flagrd();
 
-                        memtoreg(22,regprogtres[23]);
+                        memtoreg(22,323);
                         flagrd();
                         regtoreg(23,22);
                         flagrd();
 
-                        memtoreg(22,regprogtres[24]);
+                        memtoreg(22,324);
                         flagrd();
                         regtoreg(24,22);
                         flagrd();
 
-                        memtoreg(22,regprogtres[25]);
+                        memtoreg(22,325);
                         flagrd();
                         regtoreg(25,22);
                         flagrd();
 
-                        memtoreg(22,regprogtres[26]);
+                        memtoreg(22,326);
                         flagrd();
                         regtoreg(26,22);
                         flagrd();
 
-                        memtoreg(22,regprogtres[27]);
+                        memtoreg(22,327);
                         flagrd();
                         regtoreg(27,22);
                         flagrd();
 
-                        memtoreg(22,regprogtres[28]);
+                        memtoreg(22,328);
                         flagrd();
                         regtoreg(28,22);
                         flagrd();
 
-                        memtoreg(22,regprogtres[29]);
+                        memtoreg(22,329);
                         flagrd();
                         regtoreg(29,22);
                         flagrd();
 
-                        memtoreg(22,regprogtres[30]);
+                        memtoreg(22,330);
                         flagrd();
                         regtoreg(30,22);
                         flagrd();
 
-                        memtoreg(22,regprogtres[31]);
+                        memtoreg(22,331);
                         flagrd();
                         regtoreg(31,22);
                         flagrd();
                     }
                     if(progatual == 3){
-                         memtoreg(22,regprogquatro[0]);
+                        memtoreg(22,332);
                         flagrd();
                         regtoreg(0,22);
                         flagrd();
 
-                        memtoreg(22,regprogquatro[1]);
+                        memtoreg(22,333);
                         flagrd();
                         regtoreg(1,22);
                         flagrd();
 
-                        memtoreg(22,regprogquatro[2]);
+                        memtoreg(22,334);
                         flagrd();
                         regtoreg(2,22);
                         flagrd();
 
-                        memtoreg(22,regprogquatro[3]);
+                        memtoreg(22,335);
                         flagrd();
                         regtoreg(3,22);
                         flagrd();
 
-                        memtoreg(22,regprogquatro[4]);
+                        memtoreg(22,336);
                         flagrd();
                         regtoreg(4,22);
                         flagrd();
 
-                        memtoreg(22,regprogquatro[5]);
+                        memtoreg(22,337);
                         flagrd();
                         regtoreg(5,22);
                         flagrd();
 
-                        memtoreg(22,regprogquatro[6]);
+                        memtoreg(22,338);
                         flagrd();
                         regtoreg(6,22);
                         flagrd();
 
-                        memtoreg(22,regprogquatro[7]);
+                        memtoreg(22,339);
                         flagrd();
                         regtoreg(7,22);
                         flagrd();
 
-                        memtoreg(22,regprogquatro[8]);
+                        memtoreg(22,340);
                         flagrd();
                         regtoreg(8,22);
                         flagrd();
 
-                        memtoreg(22,regprogquatro[9]);
+                        memtoreg(22,341);
                         flagrd();
                         regtoreg(9,22);
                         flagrd();
 
-                        memtoreg(22,regprogquatro[10]);
+                        memtoreg(22,342);
                         flagrd();
                         regtoreg(10,22);
                         flagrd();
 
-                        memtoreg(22,regprogquatro[11]);
+                        memtoreg(22,343);
                         flagrd();
                         regtoreg(11,22);
                         flagrd();
 
-                        memtoreg(22,regprogquatro[12]);
+                        memtoreg(22,344);
                         flagrd();
                         regtoreg(12,22);
                         flagrd();
 
-                        memtoreg(22,regprogquatro[13]);
+                        memtoreg(22,345);
                         flagrd();
                         regtoreg(13,22);
                         flagrd();
 
-                        memtoreg(22,regprogquatro[14]);
+                        memtoreg(22,346);
                         flagrd();
                         regtoreg(14,22);
                         flagrd();
 
-                        memtoreg(22,regprogquatro[15]);
+                        memtoreg(22,347);
                         flagrd();
                         regtoreg(15,22);
                         flagrd();
 
-                        memtoreg(22,regprogquatro[16]);
+                        memtoreg(22,348);
                         flagrd();
                         regtoreg(16,22);
                         flagrd();
 
-                        memtoreg(22,regprogquatro[17]);
+                        memtoreg(22,349);
                         flagrd();
                         regtoreg(17,22);
                         flagrd();
 
-                        memtoreg(22,regprogquatro[18]);
+                        memtoreg(22,350);
                         flagrd();
                         regtoreg(18,22);
                         flagrd();
 
-                        memtoreg(22,regprogquatro[19]);
+                        memtoreg(22,351);
                         flagrd();
                         regtoreg(19,22);
                         flagrd();
 
-                        memtoreg(22,regprogquatro[20]);
+                        memtoreg(22,352);
                         flagrd();
                         regtoreg(20,22);
                         flagrd();
 
-                        memtoreg(22,regprogquatro[21]);
+                        memtoreg(22,353);
                         flagrd();
                         regtoreg(21,22);
                         flagrd();
 
-                        memtoreg(22,regprogquatro[22]);
+                        memtoreg(22,354);
                         flagrd();
                         regtoreg(22,22);
                         flagrd();
 
-                        memtoreg(22,regprogquatro[23]);
+                        memtoreg(22,355);
                         flagrd();
                         regtoreg(23,22);
                         flagrd();
 
-                        memtoreg(22,regprogquatro[24]);
+                        memtoreg(22,356);
                         flagrd();
                         regtoreg(24,22);
                         flagrd();
 
-                        memtoreg(22,regprogquatro[25]);
+                        memtoreg(22,357);
                         flagrd();
                         regtoreg(25,22);
                         flagrd();
 
-                        memtoreg(22,regprogquatro[26]);
+                        memtoreg(22,358);
                         flagrd();
                         regtoreg(26,22);
                         flagrd();
 
-                        memtoreg(22,regprogquatro[27]);
+                        memtoreg(22,359);
                         flagrd();
                         regtoreg(27,22);
                         flagrd();
 
-                        memtoreg(22,regprogquatro[28]);
+                        memtoreg(22,360);
                         flagrd();
                         regtoreg(28,22);
                         flagrd();
 
-                        memtoreg(22,regprogquatro[29]);
+                        memtoreg(22,361);
                         flagrd();
                         regtoreg(29,22);
                         flagrd();
 
-                        memtoreg(22,regprogquatro[30]);
+                        memtoreg(22,362);
                         flagrd();
                         regtoreg(30,22);
                         flagrd();
 
-                        memtoreg(22,regprogquatro[31]);
+                        memtoreg(22,363);
                         flagrd();
                         regtoreg(31,22);
                         flagrd();
-                    }*/
+                    }
 
 
                 }
@@ -1139,330 +1139,330 @@ void main(void)
                     flagrsrt();
                     regtomem(22,463);
                 }
-                /*if(progatual == 2){
-                     flagrsrt();
+                if(progatual == 2){
+                  flagrsrt();
                     regtoreg(22,0);
                     flagrsrt();
-                    regtomem(22,regprogtres[0]);
+                    regtomem(22,300);
 
                      flagrsrt();
                     regtoreg(22,1);
                     flagrsrt();
-                    regtomem(22,regprogtres[1]);
+                    regtomem(22,301);
 
                      flagrsrt();
                     regtoreg(22,2);
                     flagrsrt();
-                    regtomem(22,regprogtres[2]);
+                    regtomem(22,302);
 
                      flagrsrt();
                     regtoreg(22,3);
                     flagrsrt();
-                    regtomem(22,regprogtres[3]);
+                    regtomem(22,303);
 
                      flagrsrt();
                     regtoreg(22,4);
                     flagrsrt();
-                    regtomem(22,regprogtres[4]);
+                    regtomem(22,304);
 
 
                      flagrsrt();
                     regtoreg(22,5);
                     flagrsrt();
-                    regtomem(22,regprogtres[5]);
+                    regtomem(22,305);
 
                      flagrsrt();
                     regtoreg(22,6);
                     flagrsrt();
-                    regtomem(22,regprogtres[6]);
+                    regtomem(22,306);
 
                      flagrsrt();
                     regtoreg(22,7);
                     flagrsrt();
-                    regtomem(22,regprogtres[7]);
+                    regtomem(22,307);
 
                      flagrsrt();
                     regtoreg(22,8);
                     flagrsrt();
-                    regtomem(22,regprogtres[8]);
+                    regtomem(22,308);
 
                      flagrsrt();
                     regtoreg(22,9);
                     flagrsrt();
-                    regtomem(22,regprogtres[9]);
+                    regtomem(22,309);
 
                      flagrsrt();
                     regtoreg(22,10);
                     flagrsrt();
-                    regtomem(22,regprogtres[10]);
+                    regtomem(22,310);
 
                      flagrsrt();
                     regtoreg(22,11);
                     flagrsrt();
-                    regtomem(22,regprogtres[11]);
+                    regtomem(22,311);
 
                      flagrsrt();
                     regtoreg(22,12);
                     flagrsrt();
-                    regtomem(22,regprogtres[12]);
+                    regtomem(22,312);
 
                      flagrsrt();
                     regtoreg(22,13);
                     flagrsrt();
-                    regtomem(22,regprogtres[13]);
+                    regtomem(22,313);
 
                      flagrsrt();
                     regtoreg(22,14);
                     flagrsrt();
-                    regtomem(22,regprogtres[14]);
+                    regtomem(22,314);
 
                      flagrsrt();
                     regtoreg(22,15);
                     flagrsrt();
-                    regtomem(22,regprogtres[15]);
+                    regtomem(22,315);
 
                      flagrsrt();
                     regtoreg(22,16);
                     flagrsrt();
-                    regtomem(22,regprogtres[16]);
+                    regtomem(22,316);
 
                      flagrsrt();
                     regtoreg(22,17);
                     flagrsrt();
-                    regtomem(22,regprogtres[17]);
+                    regtomem(22,317);
 
                      flagrsrt();
                     regtoreg(22,18);
                     flagrsrt();
-                    regtomem(22,regprogtres[18]);
+                    regtomem(22,318);
 
                      flagrsrt();
                     regtoreg(22,19);
                     flagrsrt();
-                    regtomem(22,regprogtres[19]);
+                    regtomem(22,319);
 
                      flagrsrt();
                     regtoreg(22,20);
                     flagrsrt();
-                    regtomem(22,regprogtres[20]);
+                    regtomem(22,320);
 
                      flagrsrt();
                     regtoreg(22,21);
                     flagrsrt();
-                    regtomem(22,regprogtres[21]);
+                    regtomem(22,321);
 
                      flagrsrt();
                     regtoreg(22,22);
                     flagrsrt();
-                    regtomem(22,regprogtres[22]);
+                    regtomem(22,322);
 
                      flagrsrt();
                     regtoreg(22,23);
                     flagrsrt();
-                    regtomem(22,regprogtres[23]);
+                    regtomem(22,323);
 
                      flagrsrt();
                     regtoreg(22,24);
                     flagrsrt();
-                    regtomem(22,regprogtres[24]);
+                    regtomem(22,324);
 
                      flagrsrt();
                     regtoreg(22,25);
                     flagrsrt();
-                    regtomem(22,regprogtres[25]);
+                    regtomem(22,325);
 
                      flagrsrt();
                     regtoreg(22,26);
                     flagrsrt();
-                    regtomem(22,regprogtres[26]);
+                    regtomem(22,326);
 
                      flagrsrt();
                     regtoreg(22,27);
                     flagrsrt();
-                    regtomem(22,regprogtres[27]);
+                    regtomem(22,327);
 
                       flagrsrt();
                     regtoreg(22,28);
                     flagrsrt();
-                    regtomem(22,regprogtres[28]);
+                    regtomem(22,328);
 
                       flagrsrt();
                     regtoreg(22,29);
                     flagrsrt();
-                    regtomem(22,regprogtres[29]);
+                    regtomem(22,329);
 
                       flagrsrt();
                     regtoreg(22,30);
                     flagrsrt();
-                    regtomem(22,regprogtres[30]);
+                    regtomem(22,330);
 
                      flagrsrt();
                     regtoreg(22,31);
                     flagrsrt();
-                    regtomem(22,regprogtres[31]);
+                    regtomem(22,331);
                 }
                 if(progatual == 3){
-                     flagrsrt();
+                    flagrsrt();
                     regtoreg(22,0);
                     flagrsrt();
-                    regtomem(22,regprogquatro[0]);
+                    regtomem(22,332);
 
                      flagrsrt();
                     regtoreg(22,1);
                     flagrsrt();
-                    regtomem(22,regprogquatro[1]);
+                    regtomem(22,333);
 
                      flagrsrt();
                     regtoreg(22,2);
                     flagrsrt();
-                    regtomem(22,regprogquatro[2]);
+                    regtomem(22,334);
 
                      flagrsrt();
                     regtoreg(22,3);
                     flagrsrt();
-                    regtomem(22,regprogquatro[3]);
+                    regtomem(22,335);
 
                      flagrsrt();
                     regtoreg(22,4);
                     flagrsrt();
-                    regtomem(22,regprogquatro[4]);
+                    regtomem(22,336);
 
 
                      flagrsrt();
                     regtoreg(22,5);
                     flagrsrt();
-                    regtomem(22,regprogquatro[5]);
+                    regtomem(22,337);
 
                      flagrsrt();
                     regtoreg(22,6);
                     flagrsrt();
-                    regtomem(22,regprogquatro[6]);
+                    regtomem(22,338);
 
                      flagrsrt();
                     regtoreg(22,7);
                     flagrsrt();
-                    regtomem(22,regprogquatro[7]);
+                    regtomem(22,339);
 
                      flagrsrt();
                     regtoreg(22,8);
                     flagrsrt();
-                    regtomem(22,regprogquatro[8]);
+                    regtomem(22,340);
 
                      flagrsrt();
                     regtoreg(22,9);
                     flagrsrt();
-                    regtomem(22,regprogquatro[9]);
+                    regtomem(22,341);
 
                      flagrsrt();
                     regtoreg(22,10);
                     flagrsrt();
-                    regtomem(22,regprogquatro[10]);
+                    regtomem(22,342);
 
                      flagrsrt();
                     regtoreg(22,11);
                     flagrsrt();
-                    regtomem(22,regprogquatro[11]);
+                    regtomem(22,343);
 
                      flagrsrt();
                     regtoreg(22,12);
                     flagrsrt();
-                    regtomem(22,regprogquatro[12]);
+                    regtomem(22,344);
 
                      flagrsrt();
                     regtoreg(22,13);
                     flagrsrt();
-                    regtomem(22,regprogquatro[13]);
+                    regtomem(22,345);
 
                      flagrsrt();
                     regtoreg(22,14);
                     flagrsrt();
-                    regtomem(22,regprogquatro[14]);
+                    regtomem(22,346);
 
                      flagrsrt();
                     regtoreg(22,15);
                     flagrsrt();
-                    regtomem(22,regprogquatro[15]);
+                    regtomem(22,347);
 
                      flagrsrt();
                     regtoreg(22,16);
                     flagrsrt();
-                    regtomem(22,regprogquatro[16]);
+                    regtomem(22,348);
 
                      flagrsrt();
                     regtoreg(22,17);
                     flagrsrt();
-                    regtomem(22,regprogquatro[17]);
+                    regtomem(22,349);
 
                      flagrsrt();
                     regtoreg(22,18);
                     flagrsrt();
-                    regtomem(22,regprogquatro[18]);
+                    regtomem(22,350);
 
                      flagrsrt();
                     regtoreg(22,19);
                     flagrsrt();
-                    regtomem(22,regprogquatro[19]);
+                    regtomem(22,351);
 
                      flagrsrt();
                     regtoreg(22,20);
                     flagrsrt();
-                    regtomem(22,regprogquatro[20]);
+                    regtomem(22,352);
 
                      flagrsrt();
                     regtoreg(22,21);
                     flagrsrt();
-                    regtomem(22,regprogquatro[21]);
+                    regtomem(22,353);
 
                      flagrsrt();
                     regtoreg(22,22);
                     flagrsrt();
-                    regtomem(22,regprogquatro[22]);
+                    regtomem(22,354);
 
                      flagrsrt();
                     regtoreg(22,23);
                     flagrsrt();
-                    regtomem(22,regprogquatro[23]);
+                    regtomem(22,355);
 
                      flagrsrt();
                     regtoreg(22,24);
                     flagrsrt();
-                    regtomem(22,regprogquatro[24]);
+                    regtomem(22,356);
 
                      flagrsrt();
                     regtoreg(22,25);
                     flagrsrt();
-                    regtomem(22,regprogquatro[25]);
+                    regtomem(22,357);
 
                      flagrsrt();
                     regtoreg(22,26);
                     flagrsrt();
-                    regtomem(22,regprogquatro[26]);
+                    regtomem(22,358);
 
                      flagrsrt();
                     regtoreg(22,27);
                     flagrsrt();
-                    regtomem(22,regprogquatro[27]);
+                    regtomem(22,359);
 
                       flagrsrt();
                     regtoreg(22,28);
                     flagrsrt();
-                    regtomem(22,regprogquatro[28]);
+                    regtomem(22,360);
 
                       flagrsrt();
                     regtoreg(22,29);
                     flagrsrt();
-                    regtomem(22,regprogquatro[29]);
+                    regtomem(22,361);
 
                       flagrsrt();
                     regtoreg(22,30);
                     flagrsrt();
-                    regtomem(22,regprogquatro[30]);
+                    regtomem(22,362);
 
                      flagrsrt();
                     regtoreg(22,31);
                     flagrsrt();
-                    regtomem(22,regprogquatro[31]);
-                }*/
+                    regtomem(22,363);
+                }
 
             }
             progatual = progatual + 1;
